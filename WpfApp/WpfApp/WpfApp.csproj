@@ -45,9 +45,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WpfApp.DbProvider">
+      <HintPath>..\DbProvider\bin\Debug\WpfApp.DbProvider.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -89,7 +92,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="View\MainView.xaml">
       <SubType>Designer</SubType>
