@@ -4,43 +4,47 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Reflection;
 using MySql.Data.Entity;
+using WpfApp.DbProvider.Models;
 
 namespace WpfApp.DbProvider
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class ReportContext : DbContext
+    class ReportContext : DbContext
     {
-        public ReportContext()
+        public ReportContext() : base()
         {
-            //ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
-            //                                          Assembly.GetCallingAssembly().GetName());
+            
+        }
+       
+        public ReportContext(string dbName) : base("SecurityCapsuleConsole.ConnectionString")
+        {
+            
         }
 
-        public ReportContext(DbConnection existingDbConnection, bool contextOwnsConnection) : base(existingDbConnection, contextOwnsConnection)
-        {
 
-        }
-
-        //public DbSet<CorrelationSuspicious> CorrelationsSuspicious { get; set; }
-        //public DbSet<CorrelationSuspiciousHigh> CorrelationsSuspiciousHigh { get; set; }
-        //public DbSet<CorrelationAwareness> CorrelationsAwareness { get; set; }
-        //public DbSet<CorrelationAwarenessHigh> CorrelationsAwarenessHigh { get; set; }
-        //public DbSet<CorrelationAnalyze> CorrelationsAnalyze { get; set; }
+        public DbSet<Correlation.CorrelationSuspicious> CorrelationsSuspicious { get; set; }
+        public DbSet<Correlation.CorrelationSuspiciousHigh> CorrelationsSuspiciousHigh { get; set; }
+        public DbSet<Correlation.CorrelationAwareness> CorrelationsAwareness { get; set; }
+        public DbSet<Correlation.CorrelationAwarenessHigh> CorrelationsAwarenessHigh { get; set; }
+        public DbSet<Correlation.CorrelationAnalyze> CorrelationsAnalyze { get; set; }
 
         //public DbSet<SystemTable> SystemTables { get; set; }
         //public DbSet<SystemNotificationGroup> SystemNotificationGroups { get; set; }
 
 
-        //public static string FormatConnectionString(string dbName)
-        //{
-        //    var config = ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
-        //                                              Assembly.GetCallingAssembly().GetName());
-        //    var cSecion = config.GetSection("connectionStrings") as ConnectionStringsSection;
-        //    string connectionString = cSecion.ConnectionStrings["SecurityCapsuleConsole.Properties.Notifications.connectionString"].ConnectionString;
-        //   // cSecion.C
+        public static string FormatConnectionString(string dbName)
+        {
+            //var config = ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
+            //                                          Assembly.GetCallingAssembly().GetName());
 
-        //    var joinStr = string.Join(";", connectionString, "DataBase={0}");
-        //    return string.Format(joinStr, dbName);
-        //}
+            //var cSecion = config.GetSection("connectionStrings") as ConnectionStringsSection;
+            //string connectionString = cSecion.ConnectionStrings["SecurityCapsuleConsole.ConnectionString"].ConnectionString;
+            // cSecion.C
+            var connectionString =
+                ConfigurationManager.ConnectionStrings["SecurityCapsuleConsole.ConnectionString"].ConnectionString;
+
+            var joinStr = string.Join(";", connectionString, "DataBase={0}");
+            return string.Format(joinStr, dbName);
+        }
     }
 }
