@@ -20,7 +20,7 @@ namespace WpfApp
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var context = new ReportContext();
+            var context = new ReportContext(null, true);
         }
 
         #endregion

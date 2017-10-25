@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.Entity;
 
 namespace WpfApp.DbProvider
@@ -16,8 +12,8 @@ namespace WpfApp.DbProvider
     {
         public ReportContext()
         {
-            ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
-                                                      Assembly.GetCallingAssembly().GetName());
+            //ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
+            //                                          Assembly.GetCallingAssembly().GetName());
         }
 
         public ReportContext(DbConnection existingDbConnection, bool contextOwnsConnection) : base(existingDbConnection, contextOwnsConnection)
@@ -35,16 +31,16 @@ namespace WpfApp.DbProvider
         //public DbSet<SystemNotificationGroup> SystemNotificationGroups { get; set; }
 
 
-        public static string FormatConnectionString(string dbName)
-        {
-            var config = ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
-                                                      Assembly.GetCallingAssembly().GetName());
-            var cSecion = config.GetSection("connectionStrings") as ConnectionStringsSection;
-            string connectionString = cSecion.ConnectionStrings["SecurityCapsuleConsole.Properties.Notifications.connectionString"].ConnectionString;
-           // cSecion.C
+        //public static string FormatConnectionString(string dbName)
+        //{
+        //    var config = ConfigurationManager.OpenExeConfiguration(AppDomain.CurrentDomain.BaseDirectory +
+        //                                              Assembly.GetCallingAssembly().GetName());
+        //    var cSecion = config.GetSection("connectionStrings") as ConnectionStringsSection;
+        //    string connectionString = cSecion.ConnectionStrings["SecurityCapsuleConsole.Properties.Notifications.connectionString"].ConnectionString;
+        //   // cSecion.C
 
-            var joinStr = string.Join(";", connectionString, "DataBase={0}");
-            return string.Format(joinStr, dbName);
-        }
+        //    var joinStr = string.Join(";", connectionString, "DataBase={0}");
+        //    return string.Format(joinStr, dbName);
+        //}
     }
 }
