@@ -6,10 +6,10 @@ using System.Reflection;
 using MySql.Data.Entity;
 using WpfApp.DbProvider.Models;
 
-namespace WpfApp.DbProvider
+namespace WpfApp
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    class ReportContext : DbContext
+    public class ReportContext : DbContext
     {
         public ReportContext() : base()
         {

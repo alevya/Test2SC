@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.Entity;
 using WpfApp.DbProvider;
+using WpfApp.DbProvider.Models;
 
 namespace WpfApp
 {
@@ -35,4 +36,6 @@ namespace WpfApp
 
         #endregion
     }
+
+    
 }
