@@ -7,8 +7,32 @@
         xmlns:v="clr-namespace:WpfApp.View"
         xmlns:vm="clr-namespace:WpfApp.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        WindowState="Normal"
+        Title="MainWindow" >
+    <Window.Resources>
+         <DataTemplate x:Key="ListViewTemplate">
+             <v:ListViewSystem></v:ListViewSystem>
+         </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <HeaderedContentControl Grid.Column="0">
+            <HeaderedContentControl.Header>Источник</HeaderedContentControl.Header>
+
+        <v:ListViewSystem></v:ListViewSystem>
+           
+            
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Column="1">
+            <HeaderedContentControl.Header>Группа уведомлений</HeaderedContentControl.Header>
+
+            <v:ListViewSystem>
+            </v:ListViewSystem>
+        </HeaderedContentControl>
+
     </Grid>
 </Window>

@@ -55,6 +55,7 @@
     <Compile Include="ContextFactory.cs" />
     <Compile Include="IContextFactory.cs" />
     <Compile Include="Models\Correlation.cs" />
+    <Compile Include="Models\SystemTables.cs" />
     <Compile Include="ReportContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using System.Windows;
 using WpfApp.DbProvider;
 using WpfApp.DbProvider.Models;
+using WpfApp.View;
 
 namespace WpfApp
 {
@@ -17,15 +18,27 @@ namespace WpfApp
         {
             base.OnStartup(e);
 
-            using (var context = new ReportContext("z_october_2017"))
-            {
-                var d = context.CorrelationsAwareness;
-                var cnt = d.Count();
-                foreach (var c in d)
-                {
+            //using (var context = new ReportContext("z_october_2017"))
+            //{
+            //    var d = context.CorrelationsAwareness;
+            //    var cnt = d.Count();
+            //    foreach (var c in d)
+            //    {
 
-                }
-            }
+            //    }
+            //}
+
+            //using (var context = new ReportContext("system"))
+            //{
+            //    var sources = context.SystemTables;
+            //    var cnt = sources.Count();
+
+            //    var notifications = context.SystemNotificationGroups;
+            //    var cntNotif = notifications.Count();
+            //}
+
+            var main = new MainView();
+            main.Show();
             
             
         }
