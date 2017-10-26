@@ -9,14 +9,14 @@ using WpfApp.DbProvider.Models;
 namespace WpfApp.DbProvider
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    class ReportContext : DbContext
+    public class ReportContext : DbContext
     {
-        public ReportContext() : base()
-        {
+        //public ReportContext() : base()
+        //{
             
-        }
+        //}
        
-        public ReportContext(string dbName) : base("SecurityCapsuleConsole.ConnectionString")
+        public ReportContext(string dbName) : base(FormatConnectionString(dbName))
         {
             
         }
@@ -41,7 +41,7 @@ namespace WpfApp.DbProvider
             //string connectionString = cSecion.ConnectionStrings["SecurityCapsuleConsole.ConnectionString"].ConnectionString;
             // cSecion.C
             var connectionString =
-                ConfigurationManager.ConnectionStrings["SecurityCapsuleConsole.ConnectionString"].ConnectionString;
+                ConfigurationManager.ConnectionStrings["SecurityCapsuleConsole"].ConnectionString;
 
             var joinStr = string.Join(";", connectionString, "DataBase={0}");
             return string.Format(joinStr, dbName);
