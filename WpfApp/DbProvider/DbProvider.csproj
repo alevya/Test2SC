@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ContextFactory.cs" />
     <Compile Include="IContextFactory.cs" />
+    <Compile Include="IDbContext.cs" />
     <Compile Include="Models\Correlation.cs" />
     <Compile Include="Models\SystemTables.cs" />
     <Compile Include="ReportContext.cs" />
