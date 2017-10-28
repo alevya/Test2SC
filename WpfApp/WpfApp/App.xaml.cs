@@ -3,6 +3,7 @@ using System.Windows;
 using WpfApp.DbProvider;
 using WpfApp.DbProvider.Models;
 using WpfApp.View;
+using WpfApp.ViewModel;
 
 namespace WpfApp
 {
@@ -18,8 +19,9 @@ namespace WpfApp
         {
             base.OnStartup(e);
 
-            var main = new MainView();
-            main.Show();
+            var mainViewModel = new MainViewModel();
+            var mainView = new MainView {DataContext = mainViewModel};
+            mainView.Show();
         }
 
         #endregion

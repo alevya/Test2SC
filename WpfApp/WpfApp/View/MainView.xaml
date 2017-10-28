@@ -7,32 +7,17 @@
         xmlns:v="clr-namespace:WpfApp.View"
         xmlns:vm="clr-namespace:WpfApp.ViewModel"
         mc:Ignorable="d"
-        WindowState="Normal"
-        Title="MainWindow" >
+        WindowState="Maximized"
+        Title="Тестовое приложение для отчетов" >
     <Window.Resources>
-         <DataTemplate x:Key="ListViewTemplate">
-             <v:ListViewSystem></v:ListViewSystem>
-         </DataTemplate>
+     <DataTemplate DataType="{x:Type vm:ReportWorkspaceViewModel}">
+         <v:ReportWorkspaceView></v:ReportWorkspaceView>
+     </DataTemplate>   
+        
     </Window.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <HeaderedContentControl Grid.Column="0">
-            <HeaderedContentControl.Header>Источник</HeaderedContentControl.Header>
-
-        <v:ListViewSystem></v:ListViewSystem>
-           
-            
-        </HeaderedContentControl>
-        <HeaderedContentControl Grid.Column="1">
-            <HeaderedContentControl.Header>Группа уведомлений</HeaderedContentControl.Header>
-
-            <v:ListViewSystem>
-            </v:ListViewSystem>
-        </HeaderedContentControl>
-
+        <ContentControl Margin="10" Content="{Binding Path=.ReportWorkspace}">
+        </ContentControl> 
     </Grid>
 </Window>
