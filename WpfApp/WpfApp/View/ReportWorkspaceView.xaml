@@ -6,6 +6,19 @@
              xmlns:local="clr-namespace:WpfApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ChoiceReportItem">
+            <Border Style="{StaticResource DetailBorder}" Margin="5,5,5,0">
+                <StackPanel>
+                    <RadioButton GroupName="Group" Content="{Binding Path=Name}" FontWeight="Bold">
+                        <RadioButton.ToolTip>
+                            <Binding Path="Description" />
+                        </RadioButton.ToolTip>
+                    </RadioButton>
+                </StackPanel>
+            </Border>   
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -13,14 +26,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <HeaderedContentControl x:Name="HccChooseKindReport" Grid.Column="0" Style="{StaticResource SubDisplayArea}">
-            <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header>  
-                <ScrollViewer>
+        <HeaderedContentControl x:Name="HccChoiceKindReport" Grid.Column="0" Style="{StaticResource SubDisplayArea}">
+            <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
+            <ScrollViewer>
                     <StackPanel>
-                        <RadioButton GroupName="ChooseKindReport" Content="Отчет по источникам" IsChecked="True"/>
-                        <RadioButton GroupName="ChooseKindReport" Content="Отчет по уведомлениям" />
-                        <RadioButton GroupName="ChooseKindReport" Content="Отчет по IP-адресам"/>
-                        <RadioButton GroupName="ChooseKindReport" Content="Графики &lt;X,Y&gt; событий"/>
+                    <ItemsControl ItemTemplate="{StaticResource ChoiceReportItem}" ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" />
                 </StackPanel>    
             </ScrollViewer>
         </HeaderedContentControl>
@@ -46,3 +56,4 @@
 
     </Grid>
 </UserControl>
+
