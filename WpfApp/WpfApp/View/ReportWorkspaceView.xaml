@@ -10,7 +10,7 @@
         <DataTemplate x:Key="ChoiceReportItem">
             <Border Style="{StaticResource DetailBorder}" Margin="5,5,5,0">
                 <StackPanel>
-                    <RadioButton GroupName="Group" Content="{Binding Path=Name}" FontWeight="Bold">
+                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" Content="{Binding Path=Name}" FontWeight="Bold">
                         <RadioButton.ToolTip>
                             <Binding Path="Description" />
                         </RadioButton.ToolTip>
