@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="TestReportApp.View.FilterReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:TestReportApp.View"
+             xmlns:vm="clr-namespace:TestReportApp.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+       <StackPanel x:Name="FilterDateInterval" Grid.Row ="0" Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Top">
+           <TextBlock Text ="C:"></TextBlock>
+            <DatePicker></DatePicker>
+            <TextBlock Text ="По:" Margin="5,0,0,0"></TextBlock>
+           <DatePicker></DatePicker>
+        </StackPanel>
+       <StackPanel x:Name="FilterAdd" Grid.Row="1" Orientation="Horizontal">
+            <v:ListViewSystem></v:ListViewSystem>
+       </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="TestReportApp.View.ReportWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:TestReportApp.ViewModel"
+             xmlns:view="clr-namespace:TestReportApp.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <HeaderedContentControl x:Name="HccChoiceKindReport" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
+            <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
+            <ScrollViewer>
+                <StackPanel>
+                    <ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                                 Content="{Binding Path=Name}" FontWeight="Bold" 
+                                                 Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"
+                                                 CommandParameter="{Binding}">
+                                        <RadioButton.ToolTip>
+                                            <Binding Path="Description" />
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>    
+            </ScrollViewer>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="1" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
+            <HeaderedContentControl.Header>Фильтр</HeaderedContentControl.Header>
+            <ScrollViewer>
+                <StackPanel>
+                  <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
+                        <ContentControl>
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type viewModel:FilterReportViewModel}">
+                                    <view:FilterReportView></view:FilterReportView>
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Border>
+                    <Button Style="{StaticResource GlossyButton}" Width="Auto" Height="40" Margin="0,5,0,0"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding Path=CreateReportCommand}">
+                      Сформировать  
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl x:Name="HccReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+            <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
+            <ScrollViewer>
+                <StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </HeaderedContentControl>
+
+    </Grid>
+</UserControl>
+
