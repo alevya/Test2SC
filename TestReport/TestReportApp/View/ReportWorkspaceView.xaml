@@ -67,7 +67,11 @@
             <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
-
+                    <TextBlock  
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Margin="10, 50, 0,0" FontSize="18" FontWeight="Bold" FontStyle="Oblique">
+                        Сюда добавить контрол типа ReportViewer
+                    </TextBlock>
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>

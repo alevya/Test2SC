@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
@@ -35,12 +36,12 @@ namespace TestReportApp.ViewModel
 
         private void _createReport()
         {
-            
+            MessageBox.Show("Требуется обработка фильтра и формирование для отчета");
         }
 
         private void _choiceReport()
         {
-            
+            MessageBox.Show("Сделать выбор фильтра");
         }
         #endregion
     }
