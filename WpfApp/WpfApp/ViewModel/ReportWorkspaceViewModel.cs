@@ -19,18 +19,26 @@ namespace WpfApp.ViewModel
                           };
             FilterReport = new FilterReportViewModel();
             CreateReportCommand = new DelegateCommand(o => _createReport());
+            ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
         }
         #endregion
 
         #region Properties
+
         public IEnumerable<ReportKind> ReportKinds { get; }
         public FilterReportViewModel FilterReport { get; }
         #endregion
 
         #region Command
         public ICommand CreateReportCommand { get; }
+        public ICommand ChoiceReportCommand { get; }
 
         private void _createReport()
+        {
+            
+        }
+
+        private void _choiceReport()
         {
             
         }

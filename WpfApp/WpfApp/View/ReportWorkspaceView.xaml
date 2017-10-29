@@ -8,10 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
+        <vm:ReportWorkspaceViewModel x:Key="vm"></vm:ReportWorkspaceViewModel>
+        
         <DataTemplate x:Key="ChoiceReportItem">
             <Border Style="{StaticResource DetailBorder}" Margin="5,5,5,0">
                 <StackPanel>
-                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" Content="{Binding Path=Name}" FontWeight="Bold">
+                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                 Content="{Binding Path=Name}" FontWeight="Bold" 
+                                 Command="{Binding ChoiceReportCommand}">
                         <RadioButton.ToolTip>
                             <Binding Path="Description" />
                         </RadioButton.ToolTip>
@@ -30,8 +34,8 @@
         <HeaderedContentControl x:Name="HccChoiceKindReport" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
-                    <StackPanel>
-                    <ItemsControl ItemTemplate="{StaticResource ChoiceReportItem}" ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" />
+                <StackPanel>
+                    <ItemsControl  ItemTemplate="{StaticResource ChoiceReportItem}" ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}"/>
                 </StackPanel>    
             </ScrollViewer>
         </HeaderedContentControl>
@@ -41,7 +45,7 @@
             <ScrollViewer>
                 <StackPanel>
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
-                        <ContentControl Content="{Binding Path=.FilterReport}">
+                        <ContentControl>
                             <ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type vm:FilterReportViewModel}">
                                     <v:FilterReportView></v:FilterReportView>

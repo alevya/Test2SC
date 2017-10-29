@@ -8,11 +8,7 @@ namespace WpfApp.ViewModel.Helpers
         private readonly Predicate<object> _canExecPredicate;
         private readonly Action<object> _execAction;
 
-        public DelegateCommand(Action<object> execute) : this(execute, null)
-        {
-        }
-
-        public DelegateCommand(Action<object> execute, Predicate<object> predicate)
+        public DelegateCommand(Action<object> execute, Predicate<object> predicate = null)
         {
             _execAction = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecPredicate = predicate;
@@ -21,7 +17,7 @@ namespace WpfApp.ViewModel.Helpers
         #region ICommand Implements
         public bool CanExecute(object parameter)
         {
-            return _canExecPredicate?.Invoke(parameter) ?? false;
+            return _canExecPredicate == null || _canExecPredicate(parameter);
         }
 
         public void Execute(object parameter)
@@ -38,7 +34,6 @@ namespace WpfApp.ViewModel.Helpers
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
-        //public event EventHandler CanExecuteChanged;
         #endregion
     }
 }
