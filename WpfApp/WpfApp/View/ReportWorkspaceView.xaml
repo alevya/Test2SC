@@ -22,13 +22,14 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}">
+                    <ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
                                                  Content="{Binding Path=Name}" FontWeight="Bold" 
-                                                 Command="{Binding ChoiceReportCommand}">
+                                                 Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"
+                                                 CommandParameter="{Binding}">
                                         <RadioButton.ToolTip>
                                             <Binding Path="Description" />
                                         </RadioButton.ToolTip>
