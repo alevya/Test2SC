@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WpfApp.DbProvider.Models
+namespace TestReportApp.DbProvider.Models
 {
     public class Correlation
     {

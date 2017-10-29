@@ -58,10 +58,10 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WpfApp.DbProvider">
-      <HintPath>..\DbProvider\bin\Debug\WpfApp.DbProvider.dll</HintPath>
+    <Reference Include="TestReportApp.DbProvider">
+      <HintPath>..\DbProvider\bin\Debug\TestReportApp.DbProvider.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Windows.Controls;
-using WpfApp.DbProvider;
+using TestReportApp.DbProvider;
 
 namespace TestReportApp.View
 {

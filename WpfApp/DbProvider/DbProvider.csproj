@@ -7,8 +7,8 @@
     <ProjectGuid>{4512D5FA-09B3-4B49-8F73-82371E66DAF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WpfApp.DbProvider</RootNamespace>
-    <AssemblyName>WpfApp.DbProvider</AssemblyName>
+    <RootNamespace>TestReportApp.DbProvider</RootNamespace>
+    <AssemblyName>TestReportApp.DbProvider</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

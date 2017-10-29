@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
+using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
-using WpfApp.DbProvider.Models;
 
 namespace TestReportApp.ViewModel
 {

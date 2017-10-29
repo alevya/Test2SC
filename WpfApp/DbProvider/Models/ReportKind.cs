@@ -1,4 +1,4 @@
-﻿namespace WpfApp.DbProvider.Models
+﻿namespace TestReportApp.DbProvider.Models
 {
     public class ReportKind
     {

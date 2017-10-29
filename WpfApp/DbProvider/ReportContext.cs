@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
 using MySql.Data.Entity;
-using WpfApp.DbProvider.Models;
+using TestReportApp.DbProvider.Models;
 
-namespace WpfApp.DbProvider
+namespace TestReportApp.DbProvider
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ReportContext : DbContext
