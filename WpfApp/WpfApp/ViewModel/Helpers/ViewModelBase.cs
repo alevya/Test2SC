@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace WpfApp.ViewModel
+namespace TestReportApp.ViewModel.Helpers
 {
     internal abstract class ViewModelBase : INotifyPropertyChanged
     {

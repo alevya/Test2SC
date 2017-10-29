@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Windows;
-using WpfApp.DbProvider;
-using WpfApp.DbProvider.Models;
-using WpfApp.View;
-using WpfApp.ViewModel;
+﻿using System.Windows;
+using TestReportApp.View;
+using TestReportApp.ViewModel;
 
-namespace WpfApp
+namespace TestReportApp
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

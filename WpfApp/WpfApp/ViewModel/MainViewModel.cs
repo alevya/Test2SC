@@ -1,4 +1,6 @@
-﻿namespace WpfApp.ViewModel
+﻿using TestReportApp.ViewModel.Helpers;
+
+namespace TestReportApp.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {

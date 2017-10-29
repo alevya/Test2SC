@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WpfApp.View
+namespace TestReportApp.View
 {
     /// <summary>
     /// Логика взаимодействия для ReportWorkspaceView.xaml

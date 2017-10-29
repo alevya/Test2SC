@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using WpfApp.DbProvider;
 
-namespace WpfApp.View
+namespace TestReportApp.View
 {
     /// <summary>
     /// Логика взаимодействия для UserControl1.xaml

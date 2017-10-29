@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="WpfApp.View.ReportWorkspaceView"
+﻿<UserControl x:Class="TestReportApp.View.ReportWorkspaceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm ="clr-namespace:WpfApp.ViewModel"
-             xmlns:v ="clr-namespace:WpfApp.View"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:TestReportApp.ViewModel"
+             xmlns:view="clr-namespace:TestReportApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
-        <vm:ReportWorkspaceViewModel x:Key="vm"></vm:ReportWorkspaceViewModel>
+        <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
     </UserControl.Resources>
     
     <Grid>
@@ -49,8 +49,8 @@
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
                         <ContentControl>
                             <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type vm:FilterReportViewModel}">
-                                    <v:FilterReportView></v:FilterReportView>
+                                <DataTemplate DataType="{x:Type viewModel:FilterReportViewModel}">
+                                    <view:FilterReportView></view:FilterReportView>
                                 </DataTemplate>
                             </ContentControl.Resources>
                         </ContentControl>

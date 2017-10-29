@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WpfApp.ViewModel.Helpers
+namespace TestReportApp.ViewModel.Helpers
 {
     internal class DelegateCommand : ICommand
     {

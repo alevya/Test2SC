@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
+using TestReportApp.ViewModel.Helpers;
 using WpfApp.DbProvider.Models;
-using WpfApp.ViewModel.Helpers;
 
-namespace WpfApp.ViewModel
+namespace TestReportApp.ViewModel
 {
     internal class ReportWorkspaceViewModel : ViewModelBase
     {
