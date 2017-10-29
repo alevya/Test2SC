@@ -9,21 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
         <vm:ReportWorkspaceViewModel x:Key="vm"></vm:ReportWorkspaceViewModel>
-        
-        <DataTemplate x:Key="ChoiceReportItem">
-            <Border Style="{StaticResource DetailBorder}" Margin="5,5,5,0">
-                <StackPanel>
-                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
-                                 Content="{Binding Path=Name}" FontWeight="Bold" 
-                                 Command="{Binding ChoiceReportCommand}">
-                        <RadioButton.ToolTip>
-                            <Binding Path="Description" />
-                        </RadioButton.ToolTip>
-                    </RadioButton>
-                </StackPanel>
-            </Border>   
-        </DataTemplate>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -35,7 +22,21 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl  ItemTemplate="{StaticResource ChoiceReportItem}" ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}"/>
+                    <ItemsControl ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                                 Content="{Binding Path=Name}" FontWeight="Bold" 
+                                                 Command="{Binding ChoiceReportCommand}">
+                                        <RadioButton.ToolTip>
+                                            <Binding Path="Description" />
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>    
             </ScrollViewer>
         </HeaderedContentControl>
