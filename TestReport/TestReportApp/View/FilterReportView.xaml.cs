@@ -9,6 +9,7 @@ namespace TestReportApp.View
     {
         public FilterReportView()
         {
+			
             InitializeComponent();
         }
     }
