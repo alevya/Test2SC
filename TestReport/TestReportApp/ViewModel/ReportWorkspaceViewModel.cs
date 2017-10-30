@@ -97,7 +97,8 @@ namespace TestReportApp.ViewModel
         private void _choiceReport()
         {
             MessageBox.Show("Сделать выбор фильтра");
-
+            CurrentFilter = new FilterReportViewModel();
+            
         }
         #endregion
     }

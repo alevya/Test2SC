@@ -47,10 +47,10 @@
             <ScrollViewer>
                 <StackPanel>
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
-                        <ContentControl Content="{Binding Path = CurrentFilter, Mode=TwoWay}">
+                        <ContentControl x:Name ="FilterContent"  Content="{Binding Path = CurrentFilter, Mode=TwoWay}">
                             <ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type viewModel:BaseFilterReportViewModel}">
-                                    <view:FilterReportView></view:FilterReportView>
+                                    <view:BaseFilterReportView></view:BaseFilterReportView>
                                 </DataTemplate>
                             </ContentControl.Resources>
                         </ContentControl>
