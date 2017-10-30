@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.DbProvider.Models.Filter;
@@ -51,13 +52,14 @@ namespace TestReportApp.ViewModel
 
             //Установка первого фильтра
             CurrentReportKind = ReportKinds.FirstOrDefault();
-            if (CurrentReportKind != null) CurrentFilter = CurrentReportKind.Filter;
-
+            if (CurrentReportKind != null) CurrentFilter = new BaseFilterReportViewModel{ViewType = FilterViewType.AddFilter};
+            
             //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
 
             //Команда от RadioButton для выбора отчета
             ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
+
         }
 
         private ObservableCollection<ReportKindViewModel> _initReportKinds()
@@ -93,6 +95,7 @@ namespace TestReportApp.ViewModel
                 OnPropertyChanged();
             }
         }
+
         #endregion
 
         #region Command
@@ -106,10 +109,17 @@ namespace TestReportApp.ViewModel
 
         private void _choiceReport()
         {
-            MessageBox.Show("Сделать выбор фильтра");
-            CurrentFilter = new FilterReportViewModel();
-            
+            //MessageBox.Show("Сделать выбор фильтра");
+            //CurrentFilter = new FilterReportViewModel();
+            CurrentFilter.ViewType = CurrentFilter.ViewType == FilterViewType.BaseFilter
+                ? FilterViewType.AddFilter
+                : FilterViewType.BaseFilter;
+            var copy = CurrentFilter;
+            CurrentFilter = null;
+            CurrentFilter = copy;
+
         }
         #endregion
     }
+
 }

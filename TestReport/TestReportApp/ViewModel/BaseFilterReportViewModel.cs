@@ -4,18 +4,25 @@ using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
 {
+    public enum FilterViewType
+    {
+        BaseFilter,
+        AddFilter
+    };
     internal class BaseFilterReportViewModel : ViewModelBase
     {
-        public static BaseFilterReportViewModel BuildViewModel(FilterReport filterReport)
-        {
-            if (filterReport == null) throw new ArgumentException("fiterReport");
+        public FilterViewType ViewType { get; set; }
+
+        //public static BaseFilterReportViewModel BuildViewModel(FilterReport filterReport)
+        //{
+        //    if (filterReport == null) throw new ArgumentException("fiterReport");
 
 
-            if (filterReport is FilterReportAdd)
-            {
-                return new FilterReportViewModel();
-            }
-            return new BaseFilterReportViewModel();
-        }
+        //    if (filterReport is FilterReportAdd)
+        //    {
+        //        return new FilterReportViewModel();
+        //    }
+        //    return new BaseFilterReportViewModel();
+        //}
     }
 }
