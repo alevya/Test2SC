@@ -73,8 +73,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\BaseFilterReportViewModel.cs" />
     <Compile Include="ViewModel\FilterReportViewModel.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
+    <Compile Include="ViewModel\ReportKindViewModel.cs" />
     <Compile Include="ViewModel\ReportWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />

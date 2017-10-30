@@ -19,7 +19,7 @@
            <DatePicker></DatePicker>
         </StackPanel>
        <StackPanel x:Name="FilterAdd" Grid.Row="1" Orientation="Horizontal">
-            <v:ListViewSystem></v:ListViewSystem>
+            <!--<v:ListViewSystem></v:ListViewSystem>-->
        </StackPanel>
 
     </Grid>

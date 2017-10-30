@@ -8,7 +8,10 @@ namespace TestReportApp.ViewModel
 {
     internal class ReportWorkspaceViewModel : ViewModelBase
     {
+
         #region Init
+
+        private FilterReportViewModel _currentFilter;
         public ReportWorkspaceViewModel()
         {
             ReportKinds = new List<ReportKind>
@@ -18,8 +21,15 @@ namespace TestReportApp.ViewModel
                               new ReportKind{Name = "Отчет по IP-адресам", Description = "Отчет по общему количеству событий от каждого IP-адреса"},
                               new ReportKind{Name = "Графики <X,Y> событий", Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)"""},
                           };
-            FilterReport = new FilterReportViewModel();
+
+            //Установка первого фильтра
+            CurrentFilter = new FilterReportViewModel();
+
+
+            //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
+
+            //Команда от RadioButton для выбора отчета
             ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
         }
         #endregion
@@ -27,7 +37,16 @@ namespace TestReportApp.ViewModel
         #region Properties
 
         public IEnumerable<ReportKind> ReportKinds { get; }
-        public FilterReportViewModel FilterReport { get; }
+      
+        public FilterReportViewModel CurrentFilter
+        {
+            get => _currentFilter;
+            set
+            {
+                _currentFilter = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Command
@@ -42,6 +61,7 @@ namespace TestReportApp.ViewModel
         private void _choiceReport()
         {
             MessageBox.Show("Сделать выбор фильтра");
+
         }
         #endregion
     }

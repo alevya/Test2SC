@@ -47,7 +47,7 @@
             <ScrollViewer>
                 <StackPanel>
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
-                        <ContentControl Content="{Binding Path =.FilterReport}">
+                        <ContentControl Content="{Binding Path = CurrentFilter, Mode=TwoWay}">
                             <ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type viewModel:FilterReportViewModel}">
                                     <view:FilterReportView></view:FilterReportView>
