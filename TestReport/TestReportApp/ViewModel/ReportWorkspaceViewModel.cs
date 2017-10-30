@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
@@ -10,15 +11,47 @@ namespace TestReportApp.ViewModel
 {
     internal class ReportWorkspaceViewModel : ViewModelBase
     {
+        private static readonly IEnumerable<ReportKind> ListReportKinds = new List<ReportKind>
+        {
+            new ReportKind
+            {
+                Name = "Отчет по источникам",
+                Description = "Отчет по общему количеству событий от выбранных источников",
+                IsSelected = true,
+                Filter = new FilterReportAdd()
+            },
+            new ReportKind
+            {
+                Name = "Отчет по уведомлениям",
+                Description = "Отчет по количеству событий для каждой из групп уведомлений",
+                Filter = new FilterReportAdd(),
+            },
+            new ReportKind
+            {
+                Name = "Отчет по IP-адресам",
+                Description = "Отчет по общему количеству событий от каждого IP-адреса",
+                Filter = new FilterReport(),
+            },
+            new ReportKind
+            {
+                Name = "Графики <X,Y> событий",
+                Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
+                Filter = new FilterReportAdd(),
+            },
+        };
+
+
         #region Init
         private BaseFilterReportViewModel _currentFilter;
         public ReportWorkspaceViewModel()
         {
 
             ReportKinds = _initReportKinds();
+
             //Установка первого фильтра
-            CurrentFilter = ReportKinds[0].Filter;
-         
+            CurrentReportKind = ReportKinds.FirstOrDefault(rk => rk.IsSelected);
+            if (CurrentReportKind != null) CurrentFilter = CurrentReportKind.Filter;
+
             //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
 
@@ -28,49 +61,18 @@ namespace TestReportApp.ViewModel
 
         private ObservableCollection<ReportKindViewModel> _initReportKinds()
         {
-            var lst = new ObservableCollection<ReportKindViewModel>();
-  
-            IEnumerable<ReportKind> lstReportKinds = new List<ReportKind>
-            {
-                new ReportKind
-                {
-                    Name = "Отчет по источникам",
-                    Description = "Отчет по общему количеству событий от выбранных источников",
-                    IsSelected = true,
-                    Filter = new FilterReportAdd()
-                },
-                new ReportKind
-                {
-                    Name = "Отчет по уведомлениям",
-                    Description = "Отчет по количеству событий для каждой из групп уведомлений",
-                    Filter = new FilterReportAdd(),
-                },
-                new ReportKind
-                {
-                    Name = "Отчет по IP-адресам",
-                    Description = "Отчет по общему количеству событий от каждого IP-адреса",
-                    Filter = new FilterReport(),
-                },
-                new ReportKind
-                {
-                    Name = "Графики <X,Y> событий",
-                    Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
-                    Filter = new FilterReportAdd(),
-                },
-            };
-            foreach (var rk in lstReportKinds)
+            var lst = new ObservableCollection<ReportKindViewModel>();           
+            foreach (var rk in ListReportKinds)
             {
                lst.Add(new ReportKindViewModel(rk));
             }
-
             return lst;
         }
         #endregion
 
         #region Properties
-
-        //public IEnumerable<ReportKind> ReportKinds { get; }
         public ObservableCollection<ReportKindViewModel> ReportKinds { get; }
+        public ReportKindViewModel CurrentReportKind { get; }
 
         public BaseFilterReportViewModel CurrentFilter
         {
