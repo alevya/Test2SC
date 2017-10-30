@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
@@ -10,11 +6,16 @@ namespace TestReportApp.ViewModel
 {
     internal class ReportKindViewModel : ViewModelBase
     {
+        private bool _isSelected;
         private BaseFilterReportViewModel _filter;
         public ReportKindViewModel(ReportKind reportKind)
         {
             if(reportKind == null) throw new ArgumentException("reportKind");
             Filter = BaseFilterReportViewModel.BuildViewModel(reportKind.Filter);
+
+            Name = reportKind.Name;
+            Description = reportKind.Description;
+            IsSelected = reportKind.IsSelected;
         }
 
         public BaseFilterReportViewModel Filter
@@ -26,5 +27,21 @@ namespace TestReportApp.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        #region Properties
+        public string Name { get; }
+        public string Description { get; }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
     }
 }
