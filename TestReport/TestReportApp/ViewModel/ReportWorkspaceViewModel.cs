@@ -39,17 +39,18 @@ namespace TestReportApp.ViewModel
                 Filter = new FilterReportAdd(),
             },
         };
-
+        private BaseFilterReportViewModel _currentFilter;
+        private ReportKindViewModel _currentReportKind;
 
         #region Init
-        private BaseFilterReportViewModel _currentFilter;
+
         public ReportWorkspaceViewModel()
         {
 
             ReportKinds = _initReportKinds();
 
             //Установка первого фильтра
-            CurrentReportKind = ReportKinds.FirstOrDefault(rk => rk.IsSelected);
+            CurrentReportKind = ReportKinds.FirstOrDefault();
             if (CurrentReportKind != null) CurrentFilter = CurrentReportKind.Filter;
 
             //Команда для формирования отчета
@@ -72,7 +73,16 @@ namespace TestReportApp.ViewModel
 
         #region Properties
         public ObservableCollection<ReportKindViewModel> ReportKinds { get; }
-        public ReportKindViewModel CurrentReportKind { get; }
+
+        public ReportKindViewModel CurrentReportKind
+        {
+            get => _currentReportKind;
+            set
+            {
+                _currentReportKind = value;
+                OnPropertyChanged();
+            }
+        }
 
         public BaseFilterReportViewModel CurrentFilter
         {

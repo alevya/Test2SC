@@ -22,7 +22,7 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
+                    <!--<ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -37,7 +37,26 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    </ItemsControl>-->
+                    <DataGrid SelectedItem="{Binding Path=CurrentReportKind, Mode=TwoWay}" ItemsSource="{Binding Path=ReportKinds}" DataContext ="{StaticResource vm}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Path=Description}"></TextBlock>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>    
             </ScrollViewer>
         </HeaderedContentControl>
