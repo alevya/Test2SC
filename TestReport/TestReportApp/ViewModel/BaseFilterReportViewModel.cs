@@ -4,14 +4,36 @@ using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
 {
-    public enum FilterViewType
-    {
-        BaseFilter,
-        AddFilter
-    };
+   
     internal class BaseFilterReportViewModel : ViewModelBase
     {
-        public FilterViewType ViewType { get; set; }
+
+        public BaseFilterReportViewModel(FilterReport model)
+        {
+            Model = model;
+        }
+
+        public FilterReport Model { get; }
+
+        public DateTime DateFrom
+        {
+            get => Model.DateFrom;
+            set
+            {
+                Model.DateFrom = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime DateTo
+        {
+            get => Model.DateTo;
+            set
+            {
+                Model.DateTo = value;
+                OnPropertyChanged();
+            }
+        }
 
         //public static BaseFilterReportViewModel BuildViewModel(FilterReport filterReport)
         //{

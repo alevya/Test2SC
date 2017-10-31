@@ -5,24 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:TestReportApp.ViewModel"
              xmlns:view="clr-namespace:TestReportApp.View"
+             xmlns:rlb="clr-namespace:System.Windows.Controls.Custom"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
         <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
-        <DataTemplate x:Key="BaseFilterReportView">
+        <DataTemplate DataType="{x:Type viewModel:BaseFilterReportViewModel}">
             <view:BaseFilterReportView></view:BaseFilterReportView>
         </DataTemplate>
-        <DataTemplate x:Key="FilterReportView">
+        <DataTemplate DataType="{x:Type viewModel:FilterAddReportViewModel}">
             <view:FilterReportView></view:FilterReportView>
         </DataTemplate>
-        <viewModel:FilterViewTemplateSelector x:Key ="filterViewTemplateSelector"
+        <!--<viewModel:FilterViewTemplateSelector x:Key ="filterViewTemplateSelector"
                                               BaseFilterViewTemplate="{StaticResource BaseFilterReportView}"
                                               FilterViewTemplate="{StaticResource FilterReportView}">
-        </viewModel:FilterViewTemplateSelector>
+        </viewModel:FilterViewTemplateSelector>-->
     </UserControl.Resources>
     
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -32,14 +34,14 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
+                    <!--<ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
                                                  Content="{Binding Path=Name}" FontWeight="Bold" 
                                                  Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"
-                                                 CommandParameter="{Binding}">
+                                                 >
                                         <RadioButton.ToolTip>
                                             <Binding Path="Description" />
                                         </RadioButton.ToolTip>
@@ -47,7 +49,7 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    </ItemsControl>-->
                     <!--<DataGrid SelectedItem="{Binding Path=CurrentReportKind, Mode=TwoWay}" ItemsSource="{Binding Path=ReportKinds}" DataContext ="{StaticResource vm}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}">
@@ -67,17 +69,36 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>-->
-                </StackPanel>    
-            </ScrollViewer>
-        </HeaderedContentControl>
+                    <rlb:RadioListBox Height="Auto" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                    ItemsSource="{Binding Path=ReportKinds}" DataContext="{StaticResource vm}"
+                                    
+                                    >
 
-        <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="1" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
+                    </rlb:RadioListBox>  
+                </StackPanel>
+                
+            </ScrollViewer>
+            
+        </HeaderedContentControl>
+        <DockPanel Grid.Column="1">
+            <StackPanel DockPanel.Dock="Left">
+                <Button Content="Home Page" Command="{Binding Path=LoadHomePageCommand}" />
+                <Button Content="Settings Page" Command="{Binding Path=LoadSettingsPageCommand}"/>
+                <RadioButton Content="1" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
+                <RadioButton Content="2" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
+            </StackPanel>
+
+            <!--<ContentControl Content="{Binding Path=CurrentViewModel}"></ContentControl>-->
+        </DockPanel>
+
+        <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
             <HeaderedContentControl.Header>Фильтр</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
-                        <ContentControl x:Name ="FilterContent"  Content="{Binding Path = CurrentFilter, Mode=TwoWay}" 
-                                        ContentTemplateSelector="{StaticResource filterViewTemplateSelector}">
+                        <ContentControl  Content="{Binding Path = CurrentFilterViewModel}">
+                            <!--ContentTemplateSelector="{StaticResource filterViewTemplateSelector}"-->
+                                        
                             
                             <!--<ContentControl.Resources>
                                 <DataTemplate DataType="{x:Type viewModel:ReportKindViewModel}">
@@ -86,15 +107,14 @@
                             </ContentControl.Resources>-->
                         </ContentControl>
                     </Border>
-                    <Button Style="{StaticResource GlossyButton}" Width="Auto" Height="40" Margin="0,5,0,0"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding Path=CreateReportCommand}">
-                      Сформировать  
-                    </Button>
+                    <Button Content="Сформировать" Style="{StaticResource GlossyButton}" Width="Auto" Height="40" Margin="0,5,0,0"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding Path=CreateReportCommand}"/>
+                   
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>
 
-        <HeaderedContentControl x:Name="HccReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+        <HeaderedContentControl x:Name="HccReport" Grid.Column="3" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
             <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>

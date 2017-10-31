@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\BaseFilterReportViewModel.cs" />
+    <Compile Include="ViewModel\FilterAddReportViewModel.cs" />
     <Compile Include="ViewModel\FilterViewTemplateSelector.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\ReportKindViewModel.cs" />
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="View\ListViewSystem.xaml.cs">
       <DependentUpon>ListViewSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RadioListBox.xaml.cs">
+      <DependentUpon>RadioListBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
@@ -137,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ListViewSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RadioListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

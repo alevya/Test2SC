@@ -40,7 +40,7 @@ namespace TestReportApp.ViewModel
                 Filter = new FilterReportAdd(),
             },
         };
-        private BaseFilterReportViewModel _currentFilter;
+        private ViewModelBase _currentFilter;
         private ReportKindViewModel _currentReportKind;
 
         #region Init
@@ -52,13 +52,16 @@ namespace TestReportApp.ViewModel
 
             //Установка первого фильтра
             CurrentReportKind = ReportKinds.FirstOrDefault();
-            if (CurrentReportKind != null) CurrentFilter = new BaseFilterReportViewModel{ViewType = FilterViewType.AddFilter};
+            if (CurrentReportKind != null) CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
             
             //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
 
             //Команда от RadioButton для выбора отчета
             ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
+
+            this.LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
+            this.LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
 
         }
 
@@ -86,7 +89,7 @@ namespace TestReportApp.ViewModel
             }
         }
 
-        public BaseFilterReportViewModel CurrentFilter
+        public ViewModelBase CurrentFilterViewModel
         {
             get => _currentFilter;
             set
@@ -102,6 +105,9 @@ namespace TestReportApp.ViewModel
         public ICommand CreateReportCommand { get; }
         public ICommand ChoiceReportCommand { get; }
 
+        public ICommand LoadHomePageCommand { get; private set; }
+        public ICommand LoadSettingsPageCommand { get; private set; }
+
         private void _createReport()
         {
             MessageBox.Show("Требуется обработка фильтра и формирование для отчета");
@@ -110,14 +116,18 @@ namespace TestReportApp.ViewModel
         private void _choiceReport()
         {
             //MessageBox.Show("Сделать выбор фильтра");
-            //CurrentFilter = new FilterReportViewModel();
-            CurrentFilter.ViewType = CurrentFilter.ViewType == FilterViewType.BaseFilter
-                ? FilterViewType.AddFilter
-                : FilterViewType.BaseFilter;
-            var copy = CurrentFilter;
-            CurrentFilter = null;
-            CurrentFilter = copy;
+            CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
 
+        }
+
+        private void LoadHomePage()
+        {
+            CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
+        }
+
+        private void LoadSettingsPage()
+        {
+            CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
         }
         #endregion
     }

@@ -15,14 +15,14 @@ namespace TestReportApp.ViewModel
                 var vm = item as BaseFilterReportViewModel;
                 if (vm == null) return null;
                
-                switch (vm.ViewType)
-                {
-                    case FilterViewType.BaseFilter:
-                        return BaseFilterViewTemplate;
-                    case FilterViewType.AddFilter:
-                        return FilterViewTemplate;
+                //switch (vm.ViewType)
+                //{
+                //    case FilterViewType.BaseFilter:
+                //        return BaseFilterViewTemplate;
+                //    case FilterViewType.AddFilter:
+                //        return FilterViewTemplate;
                         
-                }
+                //}
                 return null;
             }
       }
