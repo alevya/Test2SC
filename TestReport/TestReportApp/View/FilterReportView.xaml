@@ -19,9 +19,12 @@
             <ContentControl>
                 <view:BaseFilterReportView></view:BaseFilterReportView>
             </ContentControl>
-            <ContentControl>
-                <view:ListViewSystem></view:ListViewSystem>
-            </ContentControl>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Выбор источника" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
+                <ContentControl>
+                     <view:ListViewSystem></view:ListViewSystem>
+                </ContentControl>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

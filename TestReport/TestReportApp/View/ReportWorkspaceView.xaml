@@ -23,7 +23,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
@@ -64,7 +63,7 @@
             
         </HeaderedContentControl>
       
-        <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
+        <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="1" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
             <HeaderedContentControl.Header>Фильтр</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
@@ -79,7 +78,7 @@
             </ScrollViewer>
         </HeaderedContentControl>
 
-        <HeaderedContentControl x:Name="HccReport" Grid.Column="3" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+        <HeaderedContentControl x:Name="HccReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
             <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
