@@ -73,9 +73,9 @@ namespace TestReportApp.ViewModel
         {
             var lst = new ObservableCollection<IReportKind>();           
            
-            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(0)));
+            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(0)));
             lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1)));
-            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(2)));
+            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(2)));
             lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(3)));
             return lst;
         }
