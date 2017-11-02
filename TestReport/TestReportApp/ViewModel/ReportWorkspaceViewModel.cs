@@ -51,7 +51,7 @@ namespace TestReportApp.ViewModel
             ReportKinds = _initReportKinds();
 
             //Установка первого фильтра
-            CurrentReportKind = ReportKinds.FirstOrDefault();
+            CurrentReportKind = ReportKinds.LastOrDefault();
             if (CurrentReportKind != null) CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
             
             //Команда для формирования отчета
@@ -59,9 +59,19 @@ namespace TestReportApp.ViewModel
 
             //Команда от RadioButton для выбора отчета
             ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
+            LoadContent = new DelegateCommand(
+                o =>
+                {
+                    CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
+                },
+                o =>
+                {
+                    return true;
+                }
+                );
 
-            this.LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
-            this.LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
+            LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
+            LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
 
         }
 
@@ -104,6 +114,8 @@ namespace TestReportApp.ViewModel
         #region Command
         public ICommand CreateReportCommand { get; }
         public ICommand ChoiceReportCommand { get; }
+
+        public ICommand LoadContent { get; set; }
 
         public ICommand LoadHomePageCommand { get; private set; }
         public ICommand LoadSettingsPageCommand { get; private set; }

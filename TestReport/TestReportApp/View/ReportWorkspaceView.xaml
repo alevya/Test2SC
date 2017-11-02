@@ -6,6 +6,7 @@
              xmlns:viewModel="clr-namespace:TestReportApp.ViewModel"
              xmlns:view="clr-namespace:TestReportApp.View"
              xmlns:rlb="clr-namespace:System.Windows.Controls.Custom"
+             xmlns:cmd ="clr-namespace:TestReportApp.ViewModel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
@@ -34,47 +35,27 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <!--<ItemsControl x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" >
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
-                                                 Content="{Binding Path=Name}" FontWeight="Bold" 
-                                                 Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"
-                                                 >
-                                        <RadioButton.ToolTip>
-                                            <Binding Path="Description" />
-                                        </RadioButton.ToolTip>
-                                    </RadioButton>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
-                    <!--<DataGrid SelectedItem="{Binding Path=CurrentReportKind, Mode=TwoWay}" ItemsSource="{Binding Path=ReportKinds}" DataContext ="{StaticResource vm}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}">
-                                <DataGridTextColumn.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="ToolTip">
-                                            <Setter.Value>
-                                                <ToolTip>
-                                                    <StackPanel>
-                                                        <TextBlock Text="{Binding Path=Description}"></TextBlock>
-                                                    </StackPanel>
-                                                </ToolTip>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DataGridTextColumn.CellStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                    <rlb:RadioListBox Height="Auto" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left"
-                                    ItemsSource="{Binding Path=ReportKinds}" DataContext="{StaticResource vm}"
-                                    
-                                    >
+                    <ListBox x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" 
+                                  cmd:CommandBehavior.RoutedEventName="SelectionChanged"
+                                  cmd:CommandBehavior.TheCommandToRun="{Binding Path=LoadContent}">
+                        <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                                 Content="{Binding Path=Name}" FontWeight="Bold"><!--Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"-->
+                                            <RadioButton.ToolTip>
+                                                <Binding Path="Description" />
+                                            </RadioButton.ToolTip>
+                                        </RadioButton>
+                                        
+                                    </StackPanel>
+                                </DataTemplate>
 
-                    </rlb:RadioListBox>  
+                        </ListBox.ItemTemplate>
+                        
+                       
+                    </ListBox>
+                    
                 </StackPanel>
                 
             </ScrollViewer>
@@ -87,8 +68,6 @@
                 <RadioButton Content="1" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
                 <RadioButton Content="2" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
             </StackPanel>
-
-            <!--<ContentControl Content="{Binding Path=CurrentViewModel}"></ContentControl>-->
         </DockPanel>
 
         <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
@@ -96,15 +75,7 @@
             <ScrollViewer>
                 <StackPanel>
                   <Border Style="{StaticResource DetailBorder}" Margin="0,5,0,0">
-                        <ContentControl  Content="{Binding Path = CurrentFilterViewModel}">
-                            <!--ContentTemplateSelector="{StaticResource filterViewTemplateSelector}"-->
-                                        
-                            
-                            <!--<ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type viewModel:ReportKindViewModel}">
-                                    <view:BaseFilterReportView></view:BaseFilterReportView>
-                                </DataTemplate>
-                            </ContentControl.Resources>-->
+                        <ContentControl  Content="{Binding Path =SelectedItem, ElementName=ReportKindItems}">
                         </ContentControl>
                     </Border>
                     <Button Content="Сформировать" Style="{StaticResource GlossyButton}" Width="Auto" Height="40" Margin="0,5,0,0"
