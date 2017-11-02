@@ -50,16 +50,11 @@ namespace TestReportApp.ViewModel
         {
 
             ReportKinds = _initReportKinds();
-
-            //Установка первого фильтра
-            CurrentReportKind = ReportKinds.LastOrDefault();
-            //if (CurrentReportKind != null) CurrentFilterViewModel = new BaseFilterReportViewModel(CurrentReportKind);
+            CurrentReportKind = ReportKinds.FirstOrDefault();
             
             //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
 
-            //Команда от RadioButton для выбора отчета
-            ChoiceReportCommand = new DelegateCommand(o=> _choiceReport());
             LoadContent = new DelegateCommand(
                 o =>
                 {
@@ -72,22 +67,16 @@ namespace TestReportApp.ViewModel
                 }
                 );
 
-            //LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
-            //LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
-
         }
 
         private ObservableCollection<IReportKind> _initReportKinds()
         {
             var lst = new ObservableCollection<IReportKind>();           
-            //foreach (var rk in ListReportKinds)
-            //{
-               //lst.Add(new ReportKindViewModel(rk));
+           
             lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(0)));
             lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1)));
             lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(2)));
             lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(3)));
-            //}
             return lst;
         }
         #endregion
@@ -119,34 +108,12 @@ namespace TestReportApp.ViewModel
 
         #region Command
         public ICommand CreateReportCommand { get; }
-        public ICommand ChoiceReportCommand { get; }
-
         public ICommand LoadContent { get; set; }
-
-        public ICommand LoadHomePageCommand { get; private set; }
-        public ICommand LoadSettingsPageCommand { get; private set; }
 
         private void _createReport()
         {
             MessageBox.Show("Требуется обработка фильтра и формирование для отчета");
         }
-
-        private void _choiceReport()
-        {
-            //MessageBox.Show("Сделать выбор фильтра");
-            //CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
-
-        }
-
-        //private void LoadHomePage()
-        //{
-        //    CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
-        //}
-
-        //private void LoadSettingsPage()
-        //{
-        //    CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
-        //}
         #endregion
     }
 

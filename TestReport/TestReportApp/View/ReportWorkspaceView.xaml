@@ -10,16 +10,13 @@
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
         <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
+       
         <DataTemplate DataType="{x:Type viewModel:BaseFilterReportViewModel}">
             <view:BaseFilterReportView></view:BaseFilterReportView>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:FilterAddReportViewModel}">
             <view:FilterReportView></view:FilterReportView>
         </DataTemplate>
-        <!--<viewModel:FilterViewTemplateSelector x:Key ="filterViewTemplateSelector"
-                                              BaseFilterViewTemplate="{StaticResource BaseFilterReportView}"
-                                              FilterViewTemplate="{StaticResource FilterReportView}">
-        </viewModel:FilterViewTemplateSelector>-->
     </UserControl.Resources>
     
     <Grid>
@@ -34,38 +31,36 @@
             <HeaderedContentControl.Header>Выбор отчета</HeaderedContentControl.Header> 
             <ScrollViewer>
                 <StackPanel>
-                    <ListBox x:Name="ReportKindItems"  ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}" DataContext="{StaticResource vm}" 
-                                  cmd:CommandBehavior.RoutedEventName="SelectionChanged"
-                                  cmd:CommandBehavior.TheCommandToRun="{Binding Path=LoadContent}">
+                    <ListBox x:Name="ReportKindItems"  
+                             ItemsSource="{Binding Path=ReportKinds, Mode=OneTime}"
+                             DataContext="{StaticResource vm}" 
+                             cmd:CommandBehavior.RoutedEventName="SelectionChanged"
+                             cmd:CommandBehavior.TheCommandToRun="{Binding Path=LoadContent}">
+                        <ListBox.SelectedItem> 
+                            <Binding Path="CurrentReportKind"></Binding>
+                        </ListBox.SelectedItem>
                         <ListBox.ItemTemplate>
+                            <!--<DataTemplate>
+                                <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                                 Content="{Binding Path=Name}" FontWeight="Bold"
+                                             HorizontalAlignment="Left">
+                                    <RadioButton.ToolTip>
+                                        <Binding Path="Description" />
+                                    </RadioButton.ToolTip>
+                                </RadioButton>
+                            </DataTemplate>-->
                             <DataTemplate>
-                                <StackPanel>
-                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
-                                                 Content="{Binding Path=Name}" FontWeight="Bold">
-                                        <!--Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"-->
-                                        <RadioButton.ToolTip>
-                                            <Binding Path="Description" />
-                                        </RadioButton.ToolTip>
-                                    </RadioButton>
-
+                                <StackPanel Orientation="Horizontal" Width="Auto">
+                                    <TextBlock Text ="{Binding Path=Name, Mode=OneTime}" HorizontalAlignment="Left"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
-
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
             </ScrollViewer>
             
         </HeaderedContentControl>
-        <DockPanel Grid.Column="1">
-            <StackPanel DockPanel.Dock="Left">
-                <Button Content="Home Page" Command="{Binding Path=LoadHomePageCommand}" />
-                <Button Content="Settings Page" Command="{Binding Path=LoadSettingsPageCommand}"/>
-                <RadioButton Content="1" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
-                <RadioButton Content="2" Command="{Binding Path =ChoiceReportCommand}"></RadioButton>
-            </StackPanel>
-        </DockPanel>
-
+      
         <HeaderedContentControl x:Name="HccFilterReport" Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" Width="Auto">
             <HeaderedContentControl.Header>Фильтр</HeaderedContentControl.Header>
             <ScrollViewer>
