@@ -54,7 +54,7 @@
                             
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Width="Auto">
-                                    <TextBlock Text ="{Binding Path=Name, Mode=OneTime}" HorizontalAlignment="Left"></TextBlock>
+                                    <TextBlock Text ="{Binding Path=Name, Mode=OneTime}" FontWeight="DemiBold" HorizontalAlignment="Left"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

@@ -4,12 +4,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:v="clr-namespace:TestReportApp.View"
-             xmlns:vm="clr-namespace:TestReportApp.ViewModel"
+             xmlns:view="clr-namespace:TestReportApp.View"
+             xmlns:viewmodel="clr-namespace:TestReportApp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key ="BaseFilterTemplate"  DataType="{x:Type viewmodel:BaseFilterReportViewModel}">
+            <view:BaseFilterReportView/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Другой Фильтр</TextBlock>
+        <!--<TextBlock>Другой Фильтр</TextBlock>-->
+        <StackPanel Orientation="Vertical">
+            <ContentControl>
+                <view:BaseFilterReportView></view:BaseFilterReportView>
+            </ContentControl>
+            <ContentControl>
+                <view:ListViewSystem></view:ListViewSystem>
+            </ContentControl>
+        </StackPanel>
 
     </Grid>
 </UserControl>
