@@ -41,14 +41,17 @@
                         </ListBox.SelectedItem>
                         <ListBox.ItemTemplate>
                             <!--<DataTemplate>
-                                <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                <StackPanel Orientation="Horizontal" Width="Auto">
+                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
                                                  Content="{Binding Path=Name}" FontWeight="Bold"
                                              HorizontalAlignment="Left">
-                                    <RadioButton.ToolTip>
-                                        <Binding Path="Description" />
-                                    </RadioButton.ToolTip>
-                                </RadioButton>
+                                        <RadioButton.ToolTip>
+                                            <Binding Path="Description" />
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
+                                </StackPanel>
                             </DataTemplate>-->
+                            
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Width="Auto">
                                     <TextBlock Text ="{Binding Path=Name, Mode=OneTime}" HorizontalAlignment="Left"></TextBlock>
