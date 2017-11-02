@@ -9,33 +9,39 @@ namespace TestReportApp.ViewModel
    
     internal class BaseFilterReportViewModel : ViewModelBase, IReportKind
     {
+        private DateTime _dateTimeFrom;
+        private DateTime _dateTimeTo;
 
         public BaseFilterReportViewModel(ReportKind model)
         {
             Model = model;
+
+            var dtNow = DateTime.Now;
+            _dateTimeFrom = new DateTime(dtNow.Year, dtNow.Month, 1);
+            _dateTimeTo = dtNow;
         }
 
         public ReportKind Model { get; }
 
-        //public DateTime DateFrom
-        //{
-        //    get => Model.DateFrom;
-        //    set
-        //    {
-        //        Model.DateFrom = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public DateTime DateFrom
+        {
+            get => _dateTimeFrom;
+            set
+            {
+                _dateTimeFrom = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //public DateTime DateTo
-        //{
-        //    get => Model.DateTo;
-        //    set
-        //    {
-        //        Model.DateTo = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public DateTime DateTo
+        {
+            get => _dateTimeTo;
+            set
+            {
+                _dateTimeTo = value;
+                OnPropertyChanged();
+            }
+        }
 
         //public static BaseFilterReportViewModel BuildViewModel(FilterReport filterReport)
         //{

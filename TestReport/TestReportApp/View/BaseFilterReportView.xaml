@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <StackPanel x:Name="FilterDateInterval" Grid.Row ="0" Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Top">
             <TextBlock Text ="C:"></TextBlock>
-            <DatePicker DisplayDate="{Binding Path=DateFrom}"></DatePicker>
+            <DatePicker DisplayDate="{Binding Path=DateFrom}" SelectedDate="{Binding Path=DateFrom}"></DatePicker>
             <TextBlock Text ="По:" Margin="5,0,0,0"></TextBlock>
-            <DatePicker DisplayDate="{Binding Path=DateTo}"></DatePicker>
+            <DatePicker DisplayDate="{Binding Path=DateTo}" SelectedDate="{Binding Path=DateTo}"></DatePicker>
         </StackPanel>
         <StackPanel x:Name="FilterAdd" Grid.Row="1" Orientation="Horizontal">
             <!--<v:ListViewSystem></v:ListViewSystem>-->
