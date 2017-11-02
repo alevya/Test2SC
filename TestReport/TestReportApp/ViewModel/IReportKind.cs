@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestReportApp.ViewModel
 {
-    internal interface IReportKind
+    public interface IReportKind
     {
         string Name { get; set; }
         string Description { get; set; }

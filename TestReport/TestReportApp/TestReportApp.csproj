@@ -75,7 +75,6 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\BaseFilterReportViewModel.cs" />
     <Compile Include="ViewModel\FilterAddReportViewModel.cs" />
-    <Compile Include="ViewModel\FilterViewTemplateSelector.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\IReportKind.cs" />

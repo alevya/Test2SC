@@ -7,6 +7,7 @@ using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.DbProvider.Models.Filter;
 using TestReportApp.ViewModel.Helpers;
+using TestReportApp.ViewModel;
 
 namespace TestReportApp.ViewModel
 {
@@ -41,7 +42,7 @@ namespace TestReportApp.ViewModel
             },
         };
         private ViewModelBase _currentFilter;
-        private ReportKindViewModel _currentReportKind;
+        private IReportKind _currentReportKind;
 
         #region Init
 
@@ -52,7 +53,7 @@ namespace TestReportApp.ViewModel
 
             //Установка первого фильтра
             CurrentReportKind = ReportKinds.LastOrDefault();
-            if (CurrentReportKind != null) CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
+            //if (CurrentReportKind != null) CurrentFilterViewModel = new BaseFilterReportViewModel(CurrentReportKind);
             
             //Команда для формирования отчета
             CreateReportCommand = new DelegateCommand(o => _createReport());
@@ -62,34 +63,39 @@ namespace TestReportApp.ViewModel
             LoadContent = new DelegateCommand(
                 o =>
                 {
-                    CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
+                    //CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
+                    //CurrentReportKind = new BaseFilterReportViewModel(null);
                 },
                 o =>
                 {
-                    return true;
+                    return CurrentReportKind != null;
                 }
                 );
 
-            LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
-            LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
+            //LoadHomePageCommand = new DelegateCommand(o => this.LoadHomePage());
+            //LoadSettingsPageCommand = new DelegateCommand(o => this.LoadSettingsPage());
 
         }
 
-        private ObservableCollection<ReportKindViewModel> _initReportKinds()
+        private ObservableCollection<IReportKind> _initReportKinds()
         {
-            var lst = new ObservableCollection<ReportKindViewModel>();           
-            foreach (var rk in ListReportKinds)
-            {
-               lst.Add(new ReportKindViewModel(rk));
-            }
+            var lst = new ObservableCollection<IReportKind>();           
+            //foreach (var rk in ListReportKinds)
+            //{
+               //lst.Add(new ReportKindViewModel(rk));
+            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(0)));
+            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1)));
+            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(2)));
+            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(3)));
+            //}
             return lst;
         }
         #endregion
 
         #region Properties
-        public ObservableCollection<ReportKindViewModel> ReportKinds { get; }
+        public ObservableCollection<IReportKind> ReportKinds { get; }
 
-        public ReportKindViewModel CurrentReportKind
+        public IReportKind CurrentReportKind
         {
             get => _currentReportKind;
             set
@@ -128,19 +134,19 @@ namespace TestReportApp.ViewModel
         private void _choiceReport()
         {
             //MessageBox.Show("Сделать выбор фильтра");
-            CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
+            //CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
 
         }
 
-        private void LoadHomePage()
-        {
-            CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
-        }
+        //private void LoadHomePage()
+        //{
+        //    CurrentFilterViewModel = new BaseFilterReportViewModel(new FilterReport());
+        //}
 
-        private void LoadSettingsPage()
-        {
-            CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
-        }
+        //private void LoadSettingsPage()
+        //{
+        //    CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
+        //}
         #endregion
     }
 

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:TestReportApp.ViewModel"
              xmlns:view="clr-namespace:TestReportApp.View"
-             xmlns:rlb="clr-namespace:System.Windows.Controls.Custom"
              xmlns:cmd ="clr-namespace:TestReportApp.ViewModel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
@@ -39,25 +38,22 @@
                                   cmd:CommandBehavior.RoutedEventName="SelectionChanged"
                                   cmd:CommandBehavior.TheCommandToRun="{Binding Path=LoadContent}">
                         <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
-                                                 Content="{Binding Path=Name}" FontWeight="Bold"><!--Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"-->
-                                            <RadioButton.ToolTip>
-                                                <Binding Path="Description" />
-                                            </RadioButton.ToolTip>
-                                        </RadioButton>
-                                        
-                                    </StackPanel>
-                                </DataTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <RadioButton IsChecked="{Binding Path=IsSelected}" GroupName="Group" 
+                                                 Content="{Binding Path=Name}" FontWeight="Bold">
+                                        <!--Command="{Binding ElementName=ReportKindItems, Path=DataContext.ChoiceReportCommand}"-->
+                                        <RadioButton.ToolTip>
+                                            <Binding Path="Description" />
+                                        </RadioButton.ToolTip>
+                                    </RadioButton>
+
+                                </StackPanel>
+                            </DataTemplate>
 
                         </ListBox.ItemTemplate>
-                        
-                       
                     </ListBox>
-                    
                 </StackPanel>
-                
             </ScrollViewer>
             
         </HeaderedContentControl>
