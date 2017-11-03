@@ -11,10 +11,10 @@
     <UserControl.Resources>
         <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
        
-        <DataTemplate DataType="{x:Type viewModel:BaseFilterReportViewModel}">
-            <view:BaseFilterReportView></view:BaseFilterReportView>
+        <DataTemplate DataType="{x:Type viewModel:FilterReportIntervalViewModel}">
+            <view:FilterReportIntervalView></view:FilterReportIntervalView>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:FilterAddReportViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:FilterReportSourcesViewModel}">
             <view:FilterReportView></view:FilterReportView>
         </DataTemplate>
     </UserControl.Resources>

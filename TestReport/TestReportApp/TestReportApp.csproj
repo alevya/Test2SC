@@ -79,8 +79,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\BaseFilterReportViewModel.cs" />
-    <Compile Include="ViewModel\FilterAddReportViewModel.cs" />
+    <Compile Include="ViewModel\FilterReportIntervalViewModel.cs" />
+    <Compile Include="ViewModel\FilterReportNotifyViewModel.cs" />
+    <Compile Include="ViewModel\FilterReportSourcesViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\Helpers\ReportKind.cs" />
@@ -89,20 +90,14 @@
     <Compile Include="ViewModel\ReportWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
-    <Compile Include="View\BaseFilterReportView.xaml.cs">
-      <DependentUpon>BaseFilterReportView.xaml</DependentUpon>
+    <Compile Include="View\FilterReportIntervalView.xaml.cs">
+      <DependentUpon>FilterReportIntervalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FilterReportView.xaml.cs">
       <DependentUpon>FilterReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ListViewSystem.xaml.cs">
-      <DependentUpon>ListViewSystem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RadioListBox.xaml.cs">
-      <DependentUpon>RadioListBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
@@ -136,7 +131,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\BaseFilterReportView.xaml">
+    <Page Include="View\FilterReportIntervalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,14 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ListViewSystem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RadioListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

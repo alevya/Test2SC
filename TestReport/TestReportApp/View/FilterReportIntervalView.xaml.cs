@@ -5,9 +5,9 @@ namespace TestReportApp.View
     /// <summary>
     /// Логика взаимодействия для BaseFilterReportView.xaml
     /// </summary>
-    public partial class BaseFilterReportView : UserControl
+    public partial class FilterReportIntervalView : UserControl
     {
-        public BaseFilterReportView()
+        public FilterReportIntervalView()
         {
             InitializeComponent();
         }

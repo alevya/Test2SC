@@ -9,8 +9,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key ="BaseFilterTemplate"  DataType="{x:Type viewmodel:BaseFilterReportViewModel}">
-            <view:BaseFilterReportView/>
+        <DataTemplate x:Key ="FilterIntervalTemplate"  DataType="{x:Type viewmodel:FilterReportIntervalViewModel}">
+            <view:FilterReportIntervalView/>
         </DataTemplate>
 
         <DataTemplate x:Key="CellCheckBox">
@@ -24,7 +24,7 @@
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->
         <StackPanel Orientation="Vertical">
-            <ContentControl Content="{Binding Path=BaseFilterViewModel}">
+            <ContentControl Content="{Binding Path=FilterIntervalViewModel}">
                 <!--<view:BaseFilterReportView></view:BaseFilterReportView>-->
             </ContentControl>
             <StackPanel Orientation="Vertical">

@@ -1,17 +1,15 @@
 ﻿using System;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
-using TestReportApp.ViewModel;
 
 namespace TestReportApp.ViewModel
 {
    
-    internal class BaseFilterReportViewModel : ViewModelBase, IReportFilter
+    internal class FilterReportIntervalViewModel : ViewModelBase, IReportFilter
     {
         private DateTime _dateTimeFrom;
         private DateTime _dateTimeTo;
 
-        public BaseFilterReportViewModel(ReportKind model)
+        public FilterReportIntervalViewModel(ReportKind model)
         {
             Model = model;
 
@@ -42,18 +40,6 @@ namespace TestReportApp.ViewModel
             }
         }
 
-        //public static BaseFilterReportViewModel BuildViewModel(FilterReport filterReport)
-        //{
-        //    if (filterReport == null) throw new ArgumentException("fiterReport");
-
-
-        //    if (filterReport is FilterReportAdd)
-        //    {
-        //        return new FilterReportViewModel();
-        //    }
-        //    return new BaseFilterReportViewModel();
-        //}
-
         #region IReportKind Implements
 
         public string Name
@@ -66,29 +52,8 @@ namespace TestReportApp.ViewModel
             }
         }
 
-        public string Description
-        {
-            get => Model.Description;
-            set
-            {
-                Model.Description = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool IsSelected
-        {
-            get => Model.IsSelected;
-            set
-            {
-                Model.IsSelected = value;
-                OnPropertyChanged();
-            }
-        }
         public void GetContent()
-        {
-            
-        }
+        {   }
 
         #endregion
     }

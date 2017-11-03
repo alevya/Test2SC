@@ -7,7 +7,7 @@ namespace TestReportApp.ViewModel
     internal class ReportKindViewModel : ViewModelBase
     {
         private bool _isSelected;
-        private BaseFilterReportViewModel _filter;
+        private FilterReportIntervalViewModel _filter;
         public ReportKindViewModel(ReportKind reportKind)
         {
             if(reportKind == null) throw new ArgumentException("reportKind");
@@ -18,7 +18,7 @@ namespace TestReportApp.ViewModel
             IsSelected = reportKind.IsSelected;
         }
 
-        public BaseFilterReportViewModel Filter
+        public FilterReportIntervalViewModel Filter
         {
             get => _filter;
             set

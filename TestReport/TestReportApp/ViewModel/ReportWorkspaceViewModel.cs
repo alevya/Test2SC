@@ -72,16 +72,22 @@ namespace TestReportApp.ViewModel
             var lst = new ObservableCollection<IReportFilter>();
             foreach (var rk in ListReportKinds)
             {
+                FilterReportIntervalViewModel baseFiter;
                 switch (rk.TypeCode)
                 {
-                        case TypeCodeReport.ОтчетПоИсточникам:
-                        case TypeCodeReport.ОтчетПоУведомлениям:
-                            var baseFiter = new BaseFilterReportViewModel(null);
-                            lst.Add(new FilterAddReportViewModel(rk, baseFiter));
+                    case TypeCodeReport.ОтчетПоИсточникам:
+                        baseFiter = new FilterReportIntervalViewModel(null);
+                        lst.Add(new FilterReportSourcesViewModel(rk, baseFiter));
+                    break;
+
+                    case TypeCodeReport.ОтчетПоУведомлениям:
+                        baseFiter = new FilterReportIntervalViewModel(null);
+                        lst.Add(new FilterReportNotifyViewModel(rk, baseFiter));
                         break;
+
                     default:
-                        lst.Add(new BaseFilterReportViewModel(rk));
-                        break;
+                         lst.Add(new FilterReportIntervalViewModel(rk));
+                    break;
                 }
             }
             return lst;
