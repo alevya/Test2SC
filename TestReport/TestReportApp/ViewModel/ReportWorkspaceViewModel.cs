@@ -57,7 +57,7 @@ namespace TestReportApp.ViewModel
             CurrentReportKind = ReportKinds.FirstOrDefault();
             
             //Команда для формирования отчета
-            CreateReportCommand = new DelegateCommand(o => _createReport());
+            CreateReportCommand = new DelegateCommand(o => CurrentReportKind.GetDataForReport(), o => CurrentReportKind != null);
 
             LoadContent = new DelegateCommand(
                 o =>
@@ -115,7 +115,6 @@ namespace TestReportApp.ViewModel
 
         private void _createReport()
         {
-            MessageBox.Show("Требуется обработка фильтра и формирование для отчета");
             CurrentReportKind.GetDataForReport();
         }
         #endregion

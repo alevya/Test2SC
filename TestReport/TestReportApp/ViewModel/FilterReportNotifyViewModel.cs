@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
@@ -39,7 +40,7 @@ namespace TestReportApp.ViewModel
 
         public void GetDataForReport()
         {
-            
+            Debug.WriteLine("Получение данных из базы для отчета по уведомлениям");
         }
 
         #endregion

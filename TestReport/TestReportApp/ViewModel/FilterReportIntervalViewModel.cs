@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
@@ -57,7 +58,7 @@ namespace TestReportApp.ViewModel
 
         public void GetDataForReport()
         {
-            
+            Debug.WriteLine("Получение данных из базы для отчета ТОЛЬКО по интервалу");
         }
 
         #endregion

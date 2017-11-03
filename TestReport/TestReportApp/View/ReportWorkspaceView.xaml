@@ -41,7 +41,7 @@
                              cmd:CommandBehavior.RoutedEventName="SelectionChanged"
                              cmd:CommandBehavior.TheCommandToRun="{Binding Path=LoadContent}">
                         <ListBox.SelectedItem> 
-                            <Binding Path="CurrentReportKind"></Binding>
+                            <Binding Path="CurrentReportKind" Mode="TwoWay"></Binding>
                         </ListBox.SelectedItem>
                         <ListBox.ItemTemplate>
                             <!--<DataTemplate>
@@ -77,7 +77,11 @@
                         </ContentControl>
                     </Border>
                     <Button Content="Сформировать" Style="{StaticResource GlossyButton}" Width="Auto" Height="40" Margin="0,5,0,0"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding Path=CreateReportCommand}"/>
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            DataContext="{StaticResource vm}"
+                            cmd:CommandBehavior.RoutedEventName="Click"
+                            cmd:CommandBehavior.TheCommandToRun="{Binding Path=CreateReportCommand}"
+                            />
                    
                 </StackPanel>
             </ScrollViewer>
