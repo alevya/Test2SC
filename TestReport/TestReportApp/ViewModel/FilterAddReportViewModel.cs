@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Data.Entity;
+using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
-using TestReportApp.DbProvider.Models.Filter;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
@@ -16,13 +12,13 @@ namespace TestReportApp.ViewModel
         {
             Model = model;
         }
+
+        #region Properties
         public ReportKind Model { get; }
 
-        //public IEnumerable<string> UsageValues
-        //{
-        //    get { return this.Model.UsageValues; }
-        //}
-
+        public ObservableCollection<SystemTables.SystemTable> SystemTables { get; set; }
+        
+        #endregion
         #region IReportKind Implements
 
         public string Name
@@ -56,6 +52,12 @@ namespace TestReportApp.ViewModel
         }
         public void GetContent()
         {
+            using (var context = new ReportContext("system"))
+            {
+                context.SystemTables.Load();
+
+                SystemTables = context.SystemTables.Local;
+            }
 
         }
 

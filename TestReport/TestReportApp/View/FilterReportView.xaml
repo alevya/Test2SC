@@ -12,6 +12,14 @@
         <DataTemplate x:Key ="BaseFilterTemplate"  DataType="{x:Type viewmodel:BaseFilterReportViewModel}">
             <view:BaseFilterReportView/>
         </DataTemplate>
+
+        <DataTemplate x:Key="CellCheckBox">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}">
+                </CheckBox>
+            </StackPanel>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->
@@ -21,10 +29,16 @@
             </ContentControl>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Выбор источника" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
-                <ContentControl>
-                     <view:ListViewSystem></view:ListViewSystem>
-                </ContentControl>
+                <ContentControl/>
             </StackPanel>
+            <ListView x:Name="ListViewList" ItemsSource="{Binding SystemTables, Mode=OneTime}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource CellCheckBox}" Width="30"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
 
     </Grid>

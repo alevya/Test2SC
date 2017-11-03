@@ -58,8 +58,7 @@ namespace TestReportApp.ViewModel
             LoadContent = new DelegateCommand(
                 o =>
                 {
-                    //CurrentFilterViewModel = new FilterAddReportViewModel(new FilterReportAdd());
-                    //CurrentReportKind = new BaseFilterReportViewModel(null);
+                    CurrentReportKind.GetContent();
                 },
                 o =>
                 {
