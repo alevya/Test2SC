@@ -56,8 +56,6 @@
     <Compile Include="IContextFactory.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="Models\Correlation.cs" />
-    <Compile Include="Models\Filter\FilterReport.cs" />
-    <Compile Include="Models\ReportKind.cs" />
     <Compile Include="Models\SystemTables.cs" />
     <Compile Include="ReportContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

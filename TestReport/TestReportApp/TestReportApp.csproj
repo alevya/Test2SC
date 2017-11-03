@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\FilterAddReportViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Helpers\ReportKind.cs" />
     <Compile Include="ViewModel\IReportKind.cs" />
     <Compile Include="ViewModel\ReportKindViewModel.cs" />
     <Compile Include="ViewModel\ReportWorkspaceViewModel.cs" />

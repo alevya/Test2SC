@@ -1,13 +1,12 @@
 ﻿using System;
 using TestReportApp.DbProvider.Models;
-using TestReportApp.DbProvider.Models.Filter;
 using TestReportApp.ViewModel.Helpers;
 using TestReportApp.ViewModel;
 
 namespace TestReportApp.ViewModel
 {
    
-    internal class BaseFilterReportViewModel : ViewModelBase, IReportKind
+    internal class BaseFilterReportViewModel : ViewModelBase, IReportFilter
     {
         private DateTime _dateTimeFrom;
         private DateTime _dateTimeTo;

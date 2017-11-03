@@ -3,19 +3,19 @@ using System.Data.Entity;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
-using static TestReportApp.ViewModel.TypeReport;
 
 namespace TestReportApp.ViewModel
 {
-    internal class FilterAddReportViewModel : ViewModelBase, IReportKind
+    internal class FilterAddReportViewModel : ViewModelBase, IReportFilter
     {
-        private IReportKind _baseFilterViewModel;
-        private TypeReport _typeReport;
-        public FilterAddReportViewModel(ReportKind model, IReportKind baseFilterReportViewModel, TypeReport typeReport)
+        private IReportFilter _baseFilterViewModel;
+        private readonly TypeCodeReport _typeReport;
+
+        public FilterAddReportViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
+            _typeReport = model.TypeCode;
             _baseFilterViewModel = baseFilterReportViewModel;
-            _typeReport = typeReport;
         }
 
         #region Properties
@@ -23,7 +23,7 @@ namespace TestReportApp.ViewModel
 
         public ObservableCollection<SystemTables.SystemTable> SystemTables { get; set; }
 
-        public IReportKind BaseFilterViewModel
+        public IReportFilter BaseFilterViewModel
         {
             get => _baseFilterViewModel;
             set
@@ -67,16 +67,18 @@ namespace TestReportApp.ViewModel
         }
         public void GetContent()
         {
-            string dbName = string.Empty;
+            string dbName;
             switch (_typeReport)
             {
-                case ОтчетПоИсточникам:
+                case TypeCodeReport.ОтчетПоИсточникам:
                     dbName = "system";
                     break;
-                case TypeReport.ОтчетПоУведомлениям:
+                case TypeCodeReport.ОтчетПоУведомлениям:
                     dbName = "";
                     break;
-                    
+                default:
+                    dbName = string.Empty;
+                    break;
             }
             if(string.IsNullOrEmpty(dbName)) return;
 
@@ -87,7 +89,6 @@ namespace TestReportApp.ViewModel
 
                 SystemTables = context.SystemTables.Local;
             }
-
         }
 
         #endregion

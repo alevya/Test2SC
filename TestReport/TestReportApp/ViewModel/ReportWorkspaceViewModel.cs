@@ -2,16 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
-using TestReportApp.DbProvider.Models.Filter;
 using TestReportApp.ViewModel.Helpers;
-using TestReportApp.ViewModel;
 
 namespace TestReportApp.ViewModel
 {
-    enum TypeReport
+    public enum TypeCodeReport
     {
         ОтчетПоИсточникам,
         ОтчетПоУведомлениям,
@@ -25,34 +22,38 @@ namespace TestReportApp.ViewModel
             new ReportKind
             {
                 Name = "Отчет по источникам",
+                TypeCode = TypeCodeReport.ОтчетПоИсточникам,
                 Description = "Отчет по общему количеству событий от выбранных источников",
-                IsSelected = true,
+                IsSelected = true,     
             },
             new ReportKind
             {
                 Name = "Отчет по уведомлениям",
+                TypeCode = TypeCodeReport.ОтчетПоУведомлениям,
                 Description = "Отчет по количеству событий для каждой из групп уведомлений",
             },
             new ReportKind
             {
                 Name = "Отчет по IP-адресам",
+                TypeCode = TypeCodeReport.ОтчетПоIpАдресам,
                 Description = "Отчет по общему количеству событий от каждого IP-адреса",
             },
             new ReportKind
             {
                 Name = "Графики <X,Y> событий",
+                TypeCode = TypeCodeReport.ОтчетГрафик,
                 Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
             },
         };
         private ViewModelBase _currentFilter;
-        private IReportKind _currentReportKind;
+        private IReportFilter _currentReportKind;
 
         #region Init
 
         public ReportWorkspaceViewModel()
         {
 
-            ReportKinds = _initReportKinds();
+            ReportKinds = InitReportKinds();
             CurrentReportKind = ReportKinds.FirstOrDefault();
             
             //Команда для формирования отчета
@@ -63,31 +64,34 @@ namespace TestReportApp.ViewModel
                 {
                     CurrentReportKind.GetContent();
                 },
-                o =>
-                {
-                    return CurrentReportKind != null;
-                }
-                );
-
+                o => CurrentReportKind != null);
         }
 
-        private static ObservableCollection<IReportKind> _initReportKinds()
+        private static ObservableCollection<IReportFilter> InitReportKinds()
         {
-            var lst = new ObservableCollection<IReportKind>();
-
-            var baseFiter = new BaseFilterReportViewModel(null);
-            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(0), baseFiter, TypeReport.ОтчетПоИсточникам));
-            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1), baseFiter, TypeReport.ОтчетПоУведомлениям));
-            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(2)));
-            lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(3)));
+            var lst = new ObservableCollection<IReportFilter>();
+            foreach (var rk in ListReportKinds)
+            {
+                switch (rk.TypeCode)
+                {
+                        case TypeCodeReport.ОтчетПоИсточникам:
+                        case TypeCodeReport.ОтчетПоУведомлениям:
+                            var baseFiter = new BaseFilterReportViewModel(null);
+                            lst.Add(new FilterAddReportViewModel(rk, baseFiter));
+                        break;
+                    default:
+                        lst.Add(new BaseFilterReportViewModel(rk));
+                        break;
+                }
+            }
             return lst;
         }
         #endregion
 
         #region Properties
-        public ObservableCollection<IReportKind> ReportKinds { get; }
+        public ObservableCollection<IReportFilter> ReportKinds { get; }
 
-        public IReportKind CurrentReportKind
+        public IReportFilter CurrentReportKind
         {
             get => _currentReportKind;
             set
