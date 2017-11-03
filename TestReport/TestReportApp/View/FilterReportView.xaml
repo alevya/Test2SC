@@ -24,8 +24,8 @@
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->
         <StackPanel Orientation="Vertical">
-            <ContentControl>
-                <view:BaseFilterReportView></view:BaseFilterReportView>
+            <ContentControl Content="{Binding Path=BaseFilterViewModel}">
+                <!--<view:BaseFilterReportView></view:BaseFilterReportView>-->
             </ContentControl>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Выбор источника" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>

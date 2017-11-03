@@ -11,6 +11,13 @@ using TestReportApp.ViewModel;
 
 namespace TestReportApp.ViewModel
 {
+    enum TypeReport
+    {
+        ОтчетПоИсточникам,
+        ОтчетПоУведомлениям,
+        ОтчетПоIpАдресам,
+        ОтчетГрафик
+    }
     internal class ReportWorkspaceViewModel : ViewModelBase
     {
         private static readonly IEnumerable<ReportKind> ListReportKinds = new List<ReportKind>
@@ -20,25 +27,21 @@ namespace TestReportApp.ViewModel
                 Name = "Отчет по источникам",
                 Description = "Отчет по общему количеству событий от выбранных источников",
                 IsSelected = true,
-                Filter = new FilterReportAdd()
             },
             new ReportKind
             {
                 Name = "Отчет по уведомлениям",
                 Description = "Отчет по количеству событий для каждой из групп уведомлений",
-                Filter = new FilterReportAdd(),
             },
             new ReportKind
             {
                 Name = "Отчет по IP-адресам",
                 Description = "Отчет по общему количеству событий от каждого IP-адреса",
-                Filter = new FilterReport(),
             },
             new ReportKind
             {
                 Name = "Графики <X,Y> событий",
                 Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
-                Filter = new FilterReportAdd(),
             },
         };
         private ViewModelBase _currentFilter;
@@ -68,12 +71,13 @@ namespace TestReportApp.ViewModel
 
         }
 
-        private ObservableCollection<IReportKind> _initReportKinds()
+        private static ObservableCollection<IReportKind> _initReportKinds()
         {
-            var lst = new ObservableCollection<IReportKind>();           
-           
-            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(0)));
-            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1)));
+            var lst = new ObservableCollection<IReportKind>();
+
+            var baseFiter = new BaseFilterReportViewModel(null);
+            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(0), baseFiter, TypeReport.ОтчетПоИсточникам));
+            lst.Add(new FilterAddReportViewModel(ListReportKinds.ElementAt(1), baseFiter, TypeReport.ОтчетПоУведомлениям));
             lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(2)));
             lst.Add(new BaseFilterReportViewModel(ListReportKinds.ElementAt(3)));
             return lst;

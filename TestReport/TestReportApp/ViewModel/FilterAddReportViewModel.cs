@@ -3,20 +3,35 @@ using System.Data.Entity;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
+using static TestReportApp.ViewModel.TypeReport;
 
 namespace TestReportApp.ViewModel
 {
     internal class FilterAddReportViewModel : ViewModelBase, IReportKind
     {
-        public FilterAddReportViewModel(ReportKind model)
+        private IReportKind _baseFilterViewModel;
+        private TypeReport _typeReport;
+        public FilterAddReportViewModel(ReportKind model, IReportKind baseFilterReportViewModel, TypeReport typeReport)
         {
             Model = model;
+            _baseFilterViewModel = baseFilterReportViewModel;
+            _typeReport = typeReport;
         }
 
         #region Properties
         public ReportKind Model { get; }
 
         public ObservableCollection<SystemTables.SystemTable> SystemTables { get; set; }
+
+        public IReportKind BaseFilterViewModel
+        {
+            get => _baseFilterViewModel;
+            set
+            {
+                _baseFilterViewModel = value;
+                OnPropertyChanged();
+            }
+        }
         
         #endregion
         #region IReportKind Implements
@@ -52,8 +67,22 @@ namespace TestReportApp.ViewModel
         }
         public void GetContent()
         {
-            using (var context = new ReportContext("system"))
+            string dbName = string.Empty;
+            switch (_typeReport)
             {
+                case ОтчетПоИсточникам:
+                    dbName = "system";
+                    break;
+                case TypeReport.ОтчетПоУведомлениям:
+                    dbName = "";
+                    break;
+                    
+            }
+            if(string.IsNullOrEmpty(dbName)) return;
+
+            using (var context = new ReportContext(dbName))
+            {
+                
                 context.SystemTables.Load();
 
                 SystemTables = context.SystemTables.Local;
