@@ -4,5 +4,6 @@
     {
         string Name { get; set; }
         void GetContent();
+        void GetDataForReport();
     }
 }

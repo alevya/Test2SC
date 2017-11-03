@@ -6,7 +6,6 @@ namespace TestReportApp.ViewModel
     internal class ReportKindViewModel : ViewModelBase
     {
         private bool _isSelected;
-        private FilterReportIntervalViewModel _filter;
         public ReportKindViewModel(ReportKind reportKind)
         {
             if(reportKind == null) throw new ArgumentException("reportKind");
@@ -14,16 +13,6 @@ namespace TestReportApp.ViewModel
             Name = reportKind.Name;
             Description = reportKind.Description;
             IsSelected = reportKind.IsSelected;
-        }
-
-        public FilterReportIntervalViewModel Filter
-        {
-            get => _filter;
-            set
-            {
-                _filter = value;
-                OnPropertyChanged();
-            }
         }
 
         #region Properties

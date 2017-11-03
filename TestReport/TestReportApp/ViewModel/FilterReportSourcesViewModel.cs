@@ -36,6 +36,11 @@ namespace TestReportApp.ViewModel
             }
         }
 
+        public void GetDataForReport()
+        {
+            
+        }
+
         #endregion
     }
 }

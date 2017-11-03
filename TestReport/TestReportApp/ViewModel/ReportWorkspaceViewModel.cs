@@ -116,6 +116,7 @@ namespace TestReportApp.ViewModel
         private void _createReport()
         {
             MessageBox.Show("Требуется обработка фильтра и формирование для отчета");
+            CurrentReportKind.GetDataForReport();
         }
         #endregion
     }
