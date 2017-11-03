@@ -9,13 +9,11 @@ namespace TestReportApp.ViewModel
 {
     internal class FilterReportNotifyViewModel : ViewModelBase, IReportFilter
     {
-        private IReportFilter _filterIntervalViewModel;
-
         public FilterReportNotifyViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
             Name = "Выбор уведомлений";
-            _filterIntervalViewModel = baseFilterReportViewModel;
+            FilterIntervalViewModel = baseFilterReportViewModel;
         }
 
         #region Properties
@@ -23,15 +21,7 @@ namespace TestReportApp.ViewModel
 
         public ObservableCollection<SystemTables.SystemNotificationGroup> ItemsSource { get; set; }
 
-        public IReportFilter FilterIntervalViewModel
-        {
-            get => _filterIntervalViewModel;
-            set
-            {
-                _filterIntervalViewModel = value;
-                OnPropertyChanged();
-            }
-        }
+        public IReportFilter FilterIntervalViewModel { get; set; }
 
         #endregion
         #region IReportKind Implements

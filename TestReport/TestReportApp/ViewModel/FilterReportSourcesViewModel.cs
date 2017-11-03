@@ -8,13 +8,11 @@ namespace TestReportApp.ViewModel
 {
     internal class FilterReportSourcesViewModel : ViewModelBase, IReportFilter
     {
-        private IReportFilter _filterIntervalViewModel;
-
         public FilterReportSourcesViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
             Name = "Выбор источников";
-            _filterIntervalViewModel = baseFilterReportViewModel;
+            FilterIntervalViewModel = baseFilterReportViewModel;
         }
 
         #region Properties
@@ -22,15 +20,7 @@ namespace TestReportApp.ViewModel
 
         public ObservableCollection<SystemTables.SystemTable> ItemsSource { get; set; }
 
-        public IReportFilter FilterIntervalViewModel
-        {
-            get => _filterIntervalViewModel;
-            set
-            {
-                _filterIntervalViewModel = value;
-                OnPropertyChanged();
-            }
-        }
+        public IReportFilter FilterIntervalViewModel { get; set; }
         
         #endregion
         #region IReportKind Implements
