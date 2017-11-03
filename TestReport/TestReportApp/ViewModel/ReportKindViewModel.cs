@@ -1,5 +1,4 @@
 ﻿using System;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
@@ -11,8 +10,7 @@ namespace TestReportApp.ViewModel
         public ReportKindViewModel(ReportKind reportKind)
         {
             if(reportKind == null) throw new ArgumentException("reportKind");
-            //Filter = BaseFilterReportViewModel.BuildViewModel(reportKind.Filter);
-
+            
             Name = reportKind.Name;
             Description = reportKind.Description;
             IsSelected = reportKind.IsSelected;

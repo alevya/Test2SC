@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Linq;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
@@ -41,7 +42,7 @@ namespace TestReportApp.ViewModel
         {
             using (var context = new ReportContext("system"))
             {
-                context.SystemTables.Load();
+                context.SystemNotificationGroups.Load();
                 ItemsSource = context.SystemNotificationGroups.Local;
             }
         }

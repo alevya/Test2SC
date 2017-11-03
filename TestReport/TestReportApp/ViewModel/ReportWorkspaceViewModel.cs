@@ -45,7 +45,7 @@ namespace TestReportApp.ViewModel
                 Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
             },
         };
-        private ViewModelBase _currentFilter;
+
         private IReportFilter _currentReportKind;
 
         #region Init
@@ -103,16 +103,6 @@ namespace TestReportApp.ViewModel
             set
             {
                 _currentReportKind = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ViewModelBase CurrentFilterViewModel
-        {
-            get => _currentFilter;
-            set
-            {
-                _currentFilter = value;
                 OnPropertyChanged();
             }
         }
