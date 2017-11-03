@@ -24,14 +24,12 @@
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->
         <StackPanel Orientation="Vertical">
-            <ContentControl Content="{Binding Path=FilterIntervalViewModel}">
-                <!--<view:BaseFilterReportView></view:BaseFilterReportView>-->
-            </ContentControl>
+            <ContentControl Content="{Binding Path=FilterIntervalViewModel}"/>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Выбор источника" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
-                <ContentControl/>
+                <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
+            <ContentControl/>
             </StackPanel>
-            <ListView x:Name="ListViewList" ItemsSource="{Binding SystemTables, Mode=OneTime}">
+            <ListView x:Name="ListViewList" ItemsSource="{Binding ItemsSource, Mode=OneTime}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>

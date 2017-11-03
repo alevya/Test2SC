@@ -13,15 +13,16 @@ namespace TestReportApp.ViewModel
         public FilterReportNotifyViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
+            Name = "Выбор уведомлений";
             _filterIntervalViewModel = baseFilterReportViewModel;
         }
 
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTables.SystemNotificationGroup> SystemNotificationGroups { get; set; }
+        public ObservableCollection<SystemTables.SystemNotificationGroup> ItemsSource { get; set; }
 
-        public IReportFilter BaseFilterViewModel
+        public IReportFilter FilterIntervalViewModel
         {
             get => _filterIntervalViewModel;
             set
@@ -34,22 +35,14 @@ namespace TestReportApp.ViewModel
         #endregion
         #region IReportKind Implements
 
-        public string Name
-        {
-            get => Model.Name;
-            set
-            {
-                Model.Name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
         public void GetContent()
         {
             using (var context = new ReportContext("system"))
             {
                 context.SystemTables.Load();
-                SystemNotificationGroups = context.SystemNotificationGroups.Local;
+                ItemsSource = context.SystemNotificationGroups.Local;
             }
         }
 
