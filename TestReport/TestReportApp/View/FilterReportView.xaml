@@ -16,11 +16,11 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type filter:SystemTableViewModel}">
-            <view:SystemTableDetailView/>
+            <view:CheckDetailView/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type filter:SystemNotifyGroupViewModel}">
-            <view:SystemTableDetailView/>
+            <view:CheckDetailView/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type filter:ShapeReportViewModel}">
@@ -29,7 +29,6 @@
 
     </UserControl.Resources>
     <Grid>
-        <!--<TextBlock>Другой Фильтр</TextBlock>-->
         <StackPanel Orientation="Vertical">
             <ContentControl Content="{Binding Path=FilterIntervalViewModel}"/>
             

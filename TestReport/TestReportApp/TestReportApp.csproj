@@ -111,8 +111,8 @@
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SystemTableDetailView.xaml.cs">
-      <DependentUpon>SystemTableDetailView.xaml</DependentUpon>
+    <Compile Include="View\CheckDetailView.xaml.cs">
+      <DependentUpon>CheckDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +167,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SystemTableDetailView.xaml">
+    <Page Include="View\CheckDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
