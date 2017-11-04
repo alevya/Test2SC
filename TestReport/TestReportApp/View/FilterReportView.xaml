@@ -18,6 +18,10 @@
             <view:SystemTableDetailView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type filter:SystemNotifyGroupViewModel}">
+            <view:SystemTableDetailView/>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->

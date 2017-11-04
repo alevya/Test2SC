@@ -9,7 +9,7 @@ namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportNotifyViewModel : ViewModelBase, IReportFilter
     {
-        private SystemTableViewModel _currentSystemTableDetail;
+        private BaseSystemTableViewModel _currentSystemTableDetail;
         public FilterReportNotifyViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
@@ -20,9 +20,9 @@ namespace TestReportApp.ViewModel.Filter
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTableViewModel> SystemTableDetails { get; set; }
+        public ObservableCollection<BaseSystemTableViewModel> SystemTableDetails { get; set; }
 
-        public SystemTableViewModel CurrentSystemTableDetail
+        public BaseSystemTableViewModel CurrentSystemTableDetail
         {
             get => _currentSystemTableDetail;
             set
@@ -44,10 +44,10 @@ namespace TestReportApp.ViewModel.Filter
             using (var context = new ReportContext("system"))
             {
                 context.SystemNotificationGroups.Where(t => t.Switch.StartsWith("korrelation_")).Load();
-                SystemTableDetails = new ObservableCollection<SystemTableViewModel>();
+                SystemTableDetails = new ObservableCollection<BaseSystemTableViewModel>();
                 foreach (var st in context.SystemNotificationGroups.Local)
                 {
-                    SystemTableDetails.Add(new SystemTableViewModel(st.Name));
+                    SystemTableDetails.Add(new SystemNotifyGroupViewModel(st.Name, st.Switch));
                 }
             }
             CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();

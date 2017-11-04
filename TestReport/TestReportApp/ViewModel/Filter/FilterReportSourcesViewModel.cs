@@ -9,7 +9,7 @@ namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportSourcesViewModel : ViewModelBase, IReportFilter
     {
-        private SystemTableViewModel _currentSystemTableDetail;
+        private BaseSystemTableViewModel _currentSystemTableDetail;
         public FilterReportSourcesViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
@@ -20,9 +20,9 @@ namespace TestReportApp.ViewModel.Filter
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTableViewModel> SystemTableDetails { get; set; }
+        public ObservableCollection<BaseSystemTableViewModel> SystemTableDetails { get; set; }
 
-        public SystemTableViewModel CurrentSystemTableDetail
+        public BaseSystemTableViewModel CurrentSystemTableDetail
         {
             get => _currentSystemTableDetail;
             set
@@ -44,10 +44,10 @@ namespace TestReportApp.ViewModel.Filter
             using (var context = new ReportContext("system"))
             {
                 context.SystemTables.Where(t => t.InnerName.StartsWith("db0_")).Load();
-                SystemTableDetails = new ObservableCollection<SystemTableViewModel>();
+                SystemTableDetails = new ObservableCollection<BaseSystemTableViewModel>();
                 foreach (var st in context.SystemTables.Local)
                 {
-                    SystemTableDetails.Add(new SystemTableViewModel(st.Name));
+                    SystemTableDetails.Add(new SystemTableViewModel(st.Name, st.InnerName));
                 }
                 _currentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
@@ -60,6 +60,15 @@ namespace TestReportApp.ViewModel.Filter
             var intervalViewModel = this.FilterIntervalViewModel as FilterReportIntervalViewModel;
             var dtFrom = intervalViewModel?.DateFrom;
             var dtTo = intervalViewModel?.DateTo;
+
+            var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected);
+            if(!selectedSysTables.Any()) return;
+
+            using (var context = new ReportContext("z_october_2017"))
+            {
+                
+            }
+
         }
 
         #endregion
