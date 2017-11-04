@@ -103,8 +103,8 @@
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SystemTableDetailsView.xaml.cs">
-      <DependentUpon>SystemTableDetailsView.xaml</DependentUpon>
+    <Compile Include="View\SystemTableDetailView.xaml.cs">
+      <DependentUpon>SystemTableDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -155,7 +155,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SystemTableDetailsView.xaml">
+    <Page Include="View\SystemTableDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

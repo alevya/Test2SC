@@ -10,8 +10,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key ="FilterIntervalTemplate"  DataType="{x:Type filter:FilterReportIntervalViewModel}">
+        <DataTemplate DataType="{x:Type filter:FilterReportIntervalViewModel}">
             <view:FilterReportIntervalView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type filter:SystemTableViewModel}">
+            <view:SystemTableDetailView/>
         </DataTemplate>
 
         <DataTemplate x:Key="CellCheckBox">
@@ -30,13 +34,14 @@
                 <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
             <ContentControl/>
             </StackPanel>
-            <ListView x:Name="ListViewList" ItemsSource="{Binding ItemsSource, Mode=OneTime}">
-                <ListView.View>
+            <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=OneTime}" ItemsSource="{Binding Path=SystemTableDetails}">
+                <!--<ListView.View>
+                    
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>
                         <GridViewColumn CellTemplate="{StaticResource CellCheckBox}" Width="30"></GridViewColumn>
                     </GridView>
-                </ListView.View>
+                </ListView.View>-->
             </ListView>
         </StackPanel>
 

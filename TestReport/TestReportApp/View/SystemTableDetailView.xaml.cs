@@ -18,9 +18,9 @@ namespace TestReportApp.View
     /// <summary>
     /// Логика взаимодействия для SystemTableDetailsView.xaml
     /// </summary>
-    public partial class SystemTableDetailsView : UserControl
+    public partial class SystemTableDetailView : UserControl
     {
-        public SystemTableDetailsView()
+        public SystemTableDetailView()
         {
             InitializeComponent();
         }

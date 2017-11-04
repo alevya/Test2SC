@@ -3,13 +3,13 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using TestReportApp.DbProvider;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportNotifyViewModel : ViewModelBase, IReportFilter
     {
+        private SystemTableViewModel _currentSystemTableDetail;
         public FilterReportNotifyViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
@@ -20,7 +20,17 @@ namespace TestReportApp.ViewModel.Filter
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTables.SystemNotificationGroup> ItemsSource { get; set; }
+        public ObservableCollection<SystemTableViewModel> SystemTableDetails { get; set; }
+
+        public SystemTableViewModel CurrentSystemTableDetail
+        {
+            get => _currentSystemTableDetail;
+            set
+            {
+                _currentSystemTableDetail = value;
+                OnPropertyChanged();
+            }
+        }
 
         public IReportFilter FilterIntervalViewModel { get; set; }
 
@@ -34,8 +44,13 @@ namespace TestReportApp.ViewModel.Filter
             using (var context = new ReportContext("system"))
             {
                 context.SystemNotificationGroups.Where(t => t.Switch.StartsWith("korrelation_")).Load();
-                ItemsSource = context.SystemNotificationGroups.Local;
+                SystemTableDetails = new ObservableCollection<SystemTableViewModel>();
+                foreach (var st in context.SystemNotificationGroups.Local)
+                {
+                    SystemTableDetails.Add(new SystemTableViewModel(st.Name));
+                }
             }
+            CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
         }
 
         public void GetDataForReport()

@@ -3,13 +3,13 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using TestReportApp.DbProvider;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportSourcesViewModel : ViewModelBase, IReportFilter
     {
+        private SystemTableViewModel _currentSystemTableDetail;
         public FilterReportSourcesViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
@@ -20,7 +20,17 @@ namespace TestReportApp.ViewModel.Filter
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTableViewModel> ItemsSource { get; set; }
+        public ObservableCollection<SystemTableViewModel> SystemTableDetails { get; set; }
+
+        public SystemTableViewModel CurrentSystemTableDetail
+        {
+            get => _currentSystemTableDetail;
+            set
+            {
+                _currentSystemTableDetail = value;
+                OnPropertyChanged();
+            }
+        }
 
         public IReportFilter FilterIntervalViewModel { get; set; }
         
@@ -34,11 +44,12 @@ namespace TestReportApp.ViewModel.Filter
             using (var context = new ReportContext("system"))
             {
                 context.SystemTables.Where(t => t.InnerName.StartsWith("db0_")).Load();
-                ItemsSource = new ObservableCollection<SystemTableViewModel>();
+                SystemTableDetails = new ObservableCollection<SystemTableViewModel>();
                 foreach (var st in context.SystemTables.Local)
                 {
-                    ItemsSource.Add(new SystemTableViewModel(st.Name));
+                    SystemTableDetails.Add(new SystemTableViewModel(st.Name));
                 }
+                _currentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
         }
 

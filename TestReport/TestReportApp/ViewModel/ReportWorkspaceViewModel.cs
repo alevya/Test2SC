@@ -113,11 +113,6 @@ namespace TestReportApp.ViewModel
         #region Command
         public ICommand CreateReportCommand { get; }
         public ICommand LoadContent { get; set; }
-
-        private void _createReport()
-        {
-            CurrentReportKind.GetDataForReport();
-        }
         #endregion
     }
 
