@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using TestReportApp.ViewModel.Helpers;
 
-namespace TestReportApp.ViewModel
+namespace TestReportApp.ViewModel.Filter
 {
    
     internal class FilterReportIntervalViewModel : ViewModelBase, IReportFilter

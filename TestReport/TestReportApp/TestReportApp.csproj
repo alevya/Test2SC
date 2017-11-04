@@ -79,9 +79,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\FilterReportIntervalViewModel.cs" />
-    <Compile Include="ViewModel\FilterReportNotifyViewModel.cs" />
-    <Compile Include="ViewModel\FilterReportSourcesViewModel.cs" />
+    <Compile Include="ViewModel\Filter\FilterReportIntervalViewModel.cs" />
+    <Compile Include="ViewModel\Filter\FilterReportNotifyViewModel.cs" />
+    <Compile Include="ViewModel\Filter\FilterReportSourcesViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\Helpers\ReportKind.cs" />

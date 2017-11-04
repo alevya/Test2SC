@@ -6,10 +6,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:TestReportApp.View"
              xmlns:viewmodel="clr-namespace:TestReportApp.ViewModel"
+             xmlns:filter="clr-namespace:TestReportApp.ViewModel.Filter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key ="FilterIntervalTemplate"  DataType="{x:Type viewmodel:FilterReportIntervalViewModel}">
+        <DataTemplate x:Key ="FilterIntervalTemplate"  DataType="{x:Type filter:FilterReportIntervalViewModel}">
             <view:FilterReportIntervalView/>
         </DataTemplate>
 

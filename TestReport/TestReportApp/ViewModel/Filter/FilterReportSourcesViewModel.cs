@@ -1,11 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Linq;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
-namespace TestReportApp.ViewModel
+namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportSourcesViewModel : ViewModelBase, IReportFilter
     {
@@ -32,7 +33,7 @@ namespace TestReportApp.ViewModel
         {
             using (var context = new ReportContext("system"))
             {
-                context.SystemTables.Load();
+                context.SystemTables.Where(t => t.InnerName.StartsWith("db0_")).Load();
                 ItemsSource = context.SystemTables.Local;
             }
         }

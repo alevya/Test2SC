@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
+using TestReportApp.ViewModel.Filter;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel

@@ -6,7 +6,7 @@ using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
-namespace TestReportApp.ViewModel
+namespace TestReportApp.ViewModel.Filter
 {
     internal class FilterReportNotifyViewModel : ViewModelBase, IReportFilter
     {
@@ -33,7 +33,7 @@ namespace TestReportApp.ViewModel
         {
             using (var context = new ReportContext("system"))
             {
-                context.SystemNotificationGroups.Load();
+                context.SystemNotificationGroups.Where(t => t.Switch.StartsWith("korrelation_")).Load();
                 ItemsSource = context.SystemNotificationGroups.Local;
             }
         }
