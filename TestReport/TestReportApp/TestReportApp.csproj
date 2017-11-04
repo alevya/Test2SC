@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\Filter\SystemTableViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Helpers\EnumsReport.cs" />
     <Compile Include="ViewModel\Helpers\ReportKind.cs" />
     <Compile Include="ViewModel\IReportKind.cs" />
     <Compile Include="ViewModel\ReportKindViewModel.cs" />

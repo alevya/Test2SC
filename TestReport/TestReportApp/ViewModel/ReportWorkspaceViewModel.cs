@@ -9,13 +9,7 @@ using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel
 {
-    public enum TypeCodeReport
-    {
-        ОтчетПоИсточникам,
-        ОтчетПоУведомлениям,
-        ОтчетПоIpАдресам,
-        ОтчетГрафик
-    }
+    
     internal class ReportWorkspaceViewModel : ViewModelBase
     {
         private static readonly IEnumerable<ReportKind> ListReportKinds = new List<ReportKind>
@@ -23,28 +17,28 @@ namespace TestReportApp.ViewModel
             new ReportKind
             {
                 Name = "Отчет по источникам",
-                TypeCode = TypeCodeReport.ОтчетПоИсточникам,
+                TypeCode = TypeCodeReport.ReportOnSource,
                 Description = "Отчет по общему количеству событий от выбранных источников",
                 IsSelected = true,     
             },
             new ReportKind
             {
                 Name = "Отчет по уведомлениям",
-                TypeCode = TypeCodeReport.ОтчетПоУведомлениям,
+                TypeCode = TypeCodeReport.ReportOnNotify,
                 Description = "Отчет по количеству событий для каждой из групп уведомлений",
             },
             new ReportKind
             {
                 Name = "Отчет по IP-адресам",
-                TypeCode = TypeCodeReport.ОтчетПоIpАдресам,
+                TypeCode = TypeCodeReport.ReportOnIp,
                 Description = "Отчет по общему количеству событий от каждого IP-адреса",
             },
-            new ReportKind
-            {
-                Name = "Графики <X,Y> событий",
-                TypeCode = TypeCodeReport.ОтчетГрафик,
-                Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
-            },
+            //new ReportKind
+            //{
+            //    Name = "Графики <X,Y> событий",
+            //    TypeCode = TypeCodeReport.ОтчетГрафик,
+            //    Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
+            //},
         };
 
         private IReportFilter _currentReportKind;
@@ -76,12 +70,12 @@ namespace TestReportApp.ViewModel
                 FilterReportIntervalViewModel baseFiter;
                 switch (rk.TypeCode)
                 {
-                    case TypeCodeReport.ОтчетПоИсточникам:
+                    case TypeCodeReport.ReportOnSource:
                         baseFiter = new FilterReportIntervalViewModel(null);
                         lst.Add(new FilterReportSourcesViewModel(rk, baseFiter));
                     break;
 
-                    case TypeCodeReport.ОтчетПоУведомлениям:
+                    case TypeCodeReport.ReportOnNotify:
                         baseFiter = new FilterReportIntervalViewModel(null);
                         lst.Add(new FilterReportNotifyViewModel(rk, baseFiter));
                         break;
