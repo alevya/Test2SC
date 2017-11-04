@@ -20,7 +20,7 @@ namespace TestReportApp.ViewModel.Filter
         #region Properties
         public ReportKind Model { get; }
 
-        public ObservableCollection<SystemTables.SystemTable> ItemsSource { get; set; }
+        public ObservableCollection<SystemTableViewModel> ItemsSource { get; set; }
 
         public IReportFilter FilterIntervalViewModel { get; set; }
         
@@ -34,7 +34,11 @@ namespace TestReportApp.ViewModel.Filter
             using (var context = new ReportContext("system"))
             {
                 context.SystemTables.Where(t => t.InnerName.StartsWith("db0_")).Load();
-                ItemsSource = context.SystemTables.Local;
+                ItemsSource = new ObservableCollection<SystemTableViewModel>();
+                foreach (var st in context.SystemTables.Local)
+                {
+                    ItemsSource.Add(new SystemTableViewModel(st.Name));
+                }
             }
         }
 

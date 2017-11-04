@@ -82,6 +82,7 @@
     <Compile Include="ViewModel\Filter\FilterReportIntervalViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportNotifyViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportSourcesViewModel.cs" />
+    <Compile Include="ViewModel\Filter\SystemTableViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\Helpers\ReportKind.cs" />
@@ -101,6 +102,9 @@
     </Compile>
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SystemTableDetailsView.xaml.cs">
+      <DependentUpon>SystemTableDetailsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +135,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CompactFormStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FilterReportIntervalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ReportWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SystemTableDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
