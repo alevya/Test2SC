@@ -73,7 +73,7 @@ namespace TestReportApp.ViewModel.Filter
                 {
                     SystemTableDetails.Add(new SystemTableViewModel(st.Name, st.InnerName));
                 }
-                _currentSystemTableDetail = SystemTableDetails.FirstOrDefault();
+                //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
         }
 

@@ -34,13 +34,15 @@
             
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
-                <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=OneTime}" ItemsSource="{Binding Path=SystemTableDetails}" 
-                           SelectionMode="Multiple"/>
+                <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=TwoWay}" ItemsSource="{Binding Path=SystemTableDetails, Mode=TwoWay}" 
+                           SelectionMode="Single" />
+                <!--helpers:CommandBehavior.RoutedEventName="SelectionChanged"
+                           helpers:CommandBehavior.TheCommandToRun="{Binding Path=SelectSystemTableDetail}"-->
             </StackPanel>
             
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Выбор диаграммы" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
-                <ListView  SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}" ItemsSource="{Binding Path=ShapesCodeReport, Mode =OneTime}" />
+                <ListView  SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}" ItemsSource="{Binding Path=ShapesCodeReport, Mode=OneTime}" />
             <!--helpers:CommandBehavior.RoutedEventName="SelectionChanged"
                            helpers:CommandBehavior.TheCommandToRun="{Binding Path=Select}-->
             </StackPanel>

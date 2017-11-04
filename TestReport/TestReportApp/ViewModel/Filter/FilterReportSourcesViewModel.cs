@@ -24,6 +24,10 @@ namespace TestReportApp.ViewModel.Filter
                                    new ShapeReportViewModel(ShapeCodeReport.PieChart),
                                };
             CurrentShape = ShapesCodeReport.FirstOrDefault();
+            //SelectSystemTableDetail = new DelegateCommand(
+            //     o=> CurrentSystemTableDetail.IsSelected = !CurrentSystemTableDetail.IsSelected,
+            //     o=> CurrentSystemTableDetail != null
+            //     );
         }
 
         #region Properties
@@ -70,7 +74,7 @@ namespace TestReportApp.ViewModel.Filter
                 {
                     SystemTableDetails.Add(new SystemTableViewModel(st.Name, st.InnerName));
                 }
-                _currentSystemTableDetail = SystemTableDetails.FirstOrDefault();
+                //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
         }
 
@@ -83,7 +87,8 @@ namespace TestReportApp.ViewModel.Filter
             var dtTo = intervalViewModel?.DateTo;
 
             var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected);
-            if(!selectedSysTables.Any()) return;
+
+            if (!selectedSysTables.Any()) return;
 
             using (var context = new ReportContext("z_october_2017"))
             {
@@ -91,6 +96,12 @@ namespace TestReportApp.ViewModel.Filter
             }
 
         }
+
+        #endregion
+
+        #region Command
+
+        public ICommand SelectSystemTableDetail { get; set; }
 
         #endregion
     }

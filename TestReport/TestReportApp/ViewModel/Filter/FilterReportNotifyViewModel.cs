@@ -59,7 +59,7 @@ namespace TestReportApp.ViewModel.Filter
                     SystemTableDetails.Add(new SystemNotifyGroupViewModel(st.Name, st.Switch));
                 }
             }
-            CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
+            //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
         }
 
         public void GetDataForReport()
