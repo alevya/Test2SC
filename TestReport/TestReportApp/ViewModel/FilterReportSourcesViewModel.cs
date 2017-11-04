@@ -40,6 +40,10 @@ namespace TestReportApp.ViewModel
         public void GetDataForReport()
         {
             Debug.WriteLine("Получение данных из базы для отчета по источникам");
+
+            var intervalViewModel = this.FilterIntervalViewModel as FilterReportIntervalViewModel;
+            var dtFrom = intervalViewModel?.DateFrom;
+            var dtTo = intervalViewModel?.DateTo;
         }
 
         #endregion
