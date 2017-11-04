@@ -15,7 +15,8 @@ namespace TestReportApp.ViewModel.Filter
         public FilterReportSourcesViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
-            Name = "Выбор источников";
+            Name = model.Name;
+            NameSystemTable = "Выбор источника";
             FilterIntervalViewModel = baseFilterReportViewModel;
 
             ShapesCodeReport = new ObservableCollection<ShapeReportViewModel>
@@ -32,6 +33,7 @@ namespace TestReportApp.ViewModel.Filter
 
         #region Properties
         public ReportKind Model { get; }
+        public string NameSystemTable { get; }
 
         public ObservableCollection<BaseSystemTableViewModel> SystemTableDetails { get; set; }
         
@@ -47,12 +49,15 @@ namespace TestReportApp.ViewModel.Filter
         }
 
         public IReportFilter FilterIntervalViewModel { get; set; }
-        
+
         #endregion
         #region IReportFilter Implements
 
-        public string Name { get; set; }
-
+        public string Name
+        {
+            get { return Model?.Name; }
+            set { }
+        }
         public ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; set; }
         public ShapeReportViewModel CurrentShape
         {

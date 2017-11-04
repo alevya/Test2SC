@@ -33,7 +33,7 @@
             <ContentControl Content="{Binding Path=FilterIntervalViewModel}"/>
             
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
+                <TextBlock Text="{Binding Path=NameSystemTable}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
                 <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=TwoWay}" ItemsSource="{Binding Path=SystemTableDetails, Mode=TwoWay}" 
                            SelectionMode="Single" />
                 <!--helpers:CommandBehavior.RoutedEventName="SelectionChanged"
