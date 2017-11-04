@@ -12,9 +12,9 @@
     <UserControl.Resources>
         <viewModel:ReportWorkspaceViewModel x:Key="vm"></viewModel:ReportWorkspaceViewModel>
        
-        <DataTemplate DataType="{x:Type filter:FilterReportIntervalViewModel}">
+        <!--<DataTemplate DataType="{x:Type filter:FilterReportIntervalViewModel}">
             <view:FilterReportIntervalView></view:FilterReportIntervalView>
-        </DataTemplate>
+        </DataTemplate>-->
         
         <DataTemplate DataType="{x:Type filter:FilterReportSourcesViewModel}">
             <view:FilterReportView></view:FilterReportView>
@@ -23,6 +23,11 @@
         <DataTemplate DataType="{x:Type filter:FilterReportNotifyViewModel}">
             <view:FilterReportView></view:FilterReportView>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type filter:FilterReportIpViewModel}">
+            <view:FilterReportView></view:FilterReportView>
+        </DataTemplate>
+
     </UserControl.Resources>
     
     <Grid>

@@ -42,7 +42,7 @@ namespace TestReportApp.ViewModel.Filter
             }
         }
 
-        #region IReportKind Implements
+        #region IReportFilter Implements
 
         public string Name
         {

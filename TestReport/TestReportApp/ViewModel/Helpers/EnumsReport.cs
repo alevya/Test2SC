@@ -12,5 +12,6 @@
         ColumnChart,
         LineChart,
         PieChart,
+        TableChart,
     }
 }

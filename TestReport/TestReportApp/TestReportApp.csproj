@@ -81,6 +81,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\Filter\BaseSystemTableViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportIntervalViewModel.cs" />
+    <Compile Include="ViewModel\Filter\FilterReportIpViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportNotifyViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportSourcesViewModel.cs" />
     <Compile Include="ViewModel\Filter\ShapeReportViewModel.cs" />

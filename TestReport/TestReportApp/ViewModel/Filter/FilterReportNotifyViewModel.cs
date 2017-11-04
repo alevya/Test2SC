@@ -42,7 +42,7 @@ namespace TestReportApp.ViewModel.Filter
         public IReportFilter FilterIntervalViewModel { get; set; }
 
         #endregion
-        #region IReportKind Implements
+        #region IReportFilter Implements
 
         public string Name { get; set; }
         public ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; }

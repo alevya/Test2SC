@@ -16,6 +16,8 @@ namespace TestReportApp.ViewModel.Filter
                     return "Линейная диаграмма";
                 case ShapeCodeReport.PieChart:
                     return "Круговая диаграмма";
+                case ShapeCodeReport.TableChart:
+                    return "Табличная диаграмма";
                 default:
                     return string.Empty;
             }
