@@ -95,7 +95,7 @@ namespace TestReportApp.ViewModel.Filter
             var dtTo = intervalViewModel.DateTo;
             
             var dbNames = intervalViewModel.GetDatabaseNameFromInterval();
-            var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected);
+            var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected).ToList();
 
             if (!selectedSysTables.Any()) return;
 
