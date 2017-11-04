@@ -7,6 +7,7 @@
              xmlns:view="clr-namespace:TestReportApp.View"
              xmlns:viewmodel="clr-namespace:TestReportApp.ViewModel"
              xmlns:filter="clr-namespace:TestReportApp.ViewModel.Filter"
+             xmlns:helpers="clr-namespace:TestReportApp.ViewModel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -22,17 +23,29 @@
             <view:SystemTableDetailView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type filter:ShapeReportViewModel}">
+            <view:RadioDetailView/>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Grid>
         <!--<TextBlock>Другой Фильтр</TextBlock>-->
         <StackPanel Orientation="Vertical">
             <ContentControl Content="{Binding Path=FilterIntervalViewModel}"/>
+            
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
-            <ContentControl/>
+                <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=OneTime}" ItemsSource="{Binding Path=SystemTableDetails}" />
             </StackPanel>
-            <ListView  SelectedItem="{Binding Path=CurrentSystemTableDetail, Mode=OneTime}" ItemsSource="{Binding Path=SystemTableDetails}" />
-  
+            
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Выбор диаграммы" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></TextBlock>
+                <ListView  SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}" ItemsSource="{Binding Path=ShapesCodeReport, Mode =OneTime}" 
+                           />
+            <!--helpers:CommandBehavior.RoutedEventName="SelectionChanged"
+                           helpers:CommandBehavior.TheCommandToRun="{Binding Path=Select}-->
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using TestReportApp.ViewModel.Helpers;
 
@@ -52,6 +53,9 @@ namespace TestReportApp.ViewModel.Filter
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; }
+        public ShapeReportViewModel CurrentShape { get; set; }
 
         public void GetContent()
         {   }

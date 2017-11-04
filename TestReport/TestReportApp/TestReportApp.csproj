@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\Filter\FilterReportIntervalViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportNotifyViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportSourcesViewModel.cs" />
+    <Compile Include="ViewModel\Filter\ShapeReportViewModel.cs" />
     <Compile Include="ViewModel\Filter\SystemNotifyGroupViewModel.cs" />
     <Compile Include="ViewModel\Filter\SystemTableViewModel.cs" />
     <Compile Include="ViewModel\Helpers\CommandBehavior.cs" />
@@ -102,6 +103,9 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RadioDetailView.xaml.cs">
+      <DependentUpon>RadioDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportWorkspaceView.xaml.cs">
       <DependentUpon>ReportWorkspaceView.xaml</DependentUpon>
@@ -151,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RadioDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

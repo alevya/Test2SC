@@ -1,8 +1,14 @@
-﻿namespace TestReportApp.ViewModel
+﻿using System.Collections.ObjectModel;
+using TestReportApp.ViewModel.Filter;
+
+namespace TestReportApp.ViewModel
 {
-    public interface IReportFilter
+    internal interface IReportFilter
     {
         string Name { get; set; }
+        ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; }
+        ShapeReportViewModel CurrentShape { get; set; }
+
         void GetContent();
         void GetDataForReport();
     }

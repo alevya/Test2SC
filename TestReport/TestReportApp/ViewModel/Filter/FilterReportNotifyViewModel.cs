@@ -15,6 +15,13 @@ namespace TestReportApp.ViewModel.Filter
             Model = model;
             Name = "Выбор уведомлений";
             FilterIntervalViewModel = baseFilterReportViewModel;
+
+            ShapesCodeReport = new ObservableCollection<ShapeReportViewModel>
+                               {
+                                   new ShapeReportViewModel(ShapeCodeReport.LineChart),
+                                   new ShapeReportViewModel(ShapeCodeReport.PieChart),
+                               };
+            CurrentShape = ShapesCodeReport.FirstOrDefault();
         }
 
         #region Properties
@@ -38,6 +45,8 @@ namespace TestReportApp.ViewModel.Filter
         #region IReportKind Implements
 
         public string Name { get; set; }
+        public ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; }
+        public ShapeReportViewModel CurrentShape { get; set; }
 
         public void GetContent()
         {

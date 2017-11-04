@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Input;
 using TestReportApp.DbProvider;
 using TestReportApp.ViewModel.Helpers;
 
@@ -10,17 +11,26 @@ namespace TestReportApp.ViewModel.Filter
     internal class FilterReportSourcesViewModel : ViewModelBase, IReportFilter
     {
         private BaseSystemTableViewModel _currentSystemTableDetail;
+        private ShapeReportViewModel _currentShape;
         public FilterReportSourcesViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
             Name = "Выбор источников";
             FilterIntervalViewModel = baseFilterReportViewModel;
+
+            ShapesCodeReport = new ObservableCollection<ShapeReportViewModel>
+                               {
+                                   new ShapeReportViewModel(ShapeCodeReport.LineChart),
+                                   new ShapeReportViewModel(ShapeCodeReport.PieChart),
+                               };
+            CurrentShape = ShapesCodeReport.FirstOrDefault();
         }
 
         #region Properties
         public ReportKind Model { get; }
 
         public ObservableCollection<BaseSystemTableViewModel> SystemTableDetails { get; set; }
+        
 
         public BaseSystemTableViewModel CurrentSystemTableDetail
         {
@@ -38,6 +48,17 @@ namespace TestReportApp.ViewModel.Filter
         #region IReportKind Implements
 
         public string Name { get; set; }
+
+        public ObservableCollection<ShapeReportViewModel> ShapesCodeReport { get; set; }
+        public ShapeReportViewModel CurrentShape
+        {
+            get => _currentShape;
+            set
+            {
+                _currentShape = value;
+                OnPropertyChanged();
+            }
+        }
 
         public void GetContent()
         {
