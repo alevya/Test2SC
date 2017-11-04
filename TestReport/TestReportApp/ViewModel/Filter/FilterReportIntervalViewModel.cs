@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
@@ -42,6 +45,15 @@ namespace TestReportApp.ViewModel.Filter
             }
         }
 
+        public IEnumerable<string> GetDatabaseNameFromInterval()
+        {
+            return new HashSet<string>
+                     {
+                         string.Format(CultureInfo.InvariantCulture, "z_{0:MMMMM}_{1:yyyy}", this.DateFrom, this.DateFrom),
+                         string.Format(CultureInfo.InvariantCulture, "z_{0:MMMMM}_{1:yyyy}", this.DateTo, this.DateTo)
+                     };
+        }
+
         #region IReportFilter Implements
 
         public string Name
@@ -67,4 +79,5 @@ namespace TestReportApp.ViewModel.Filter
 
         #endregion
     }
+
 }

@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using TestReportApp.DbProvider;
+using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
@@ -83,23 +85,36 @@ namespace TestReportApp.ViewModel.Filter
             }
         }
 
-        public void GetDataForReport()
+        public async void GetDataForReport()
         {
             Debug.WriteLine("Получение данных из базы для отчета по источникам");
 
             var intervalViewModel = this.FilterIntervalViewModel as FilterReportIntervalViewModel;
-            var dtFrom = intervalViewModel?.DateFrom;
-            var dtTo = intervalViewModel?.DateTo;
-
+            if(intervalViewModel == null) return;
+            var dtFrom = intervalViewModel.DateFrom;
+            var dtTo = intervalViewModel.DateTo;
+            
+            var dbNames = intervalViewModel.GetDatabaseNameFromInterval();
             var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected);
 
             if (!selectedSysTables.Any()) return;
 
-            using (var context = new ReportContext("z_october_2017"))
+            var dResult = new Dictionary<string, int>();
+            foreach (var dbName in dbNames)
             {
-                
+                using (var context = new ReportContext(dbName))
+                {
+                    foreach (var table in selectedSysTables)
+                    {
+                        var sQuery = $"SELECT COUNT(*) FROM `db0_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'" +
+                                     " UNION " +
+                                     $"SELECT COUNT(*) FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
+                        var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();
+                        dResult.Add(table.Name, res.Sum());
+                    }
+                    
+                }
             }
-
         }
 
         #endregion
