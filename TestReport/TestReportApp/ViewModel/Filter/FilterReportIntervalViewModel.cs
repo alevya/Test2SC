@@ -18,9 +18,14 @@ namespace TestReportApp.ViewModel.Filter
         {
             Model = model;
 
+            //var dtNow = DateTime.Now;
+            //_dateTimeFrom = new DateTime(dtNow.Year, dtNow.Month, 1);
+            //_dateTimeTo = dtNow;
+
             var dtNow = DateTime.Now;
-            _dateTimeFrom = new DateTime(dtNow.Year, dtNow.Month, 1);
-            _dateTimeTo = dtNow;
+            _dateTimeFrom = new DateTime(2017, 10, 1);
+            _dateTimeTo = new DateTime(2017, 10, 31);
+
         }
 
         public ReportKind Model { get; }

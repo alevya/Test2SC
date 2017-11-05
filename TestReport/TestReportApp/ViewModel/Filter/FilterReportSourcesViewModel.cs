@@ -1,6 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
@@ -102,17 +108,29 @@ namespace TestReportApp.ViewModel.Filter
             var dResult = new Dictionary<string, int>();
             foreach (var dbName in dbNames)
             {
-                using (var context = new ReportContext(dbName))
+                try
                 {
-                    foreach (var table in selectedSysTables)
+                    using (var context = new ReportContext(dbName))
                     {
-                        var sQuery = $"SELECT COUNT(*) FROM `db0_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'" +
-                                     " UNION " +
-                                     $"SELECT COUNT(*) FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
-                        var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();
-                        dResult.Add(table.Name, res.Sum());
+                        foreach (var table in selectedSysTables)
+                        {
+                            var sQuery =
+                                $"SELECT COUNT(*) FROM `db0_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'" +
+                                " UNION " +
+                                $"SELECT COUNT(*) FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
+                            var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();
+
+                            if (!dResult.ContainsKey(table.Name))
+                                dResult.Add(table.Name, res.Sum());
+                            else
+                                dResult[dbName] += res.Sum();
+                        }
+
                     }
-                    
+                }
+                catch(Exception exc)
+                {
+                    Debug.WriteLine(exc.Message);
                 }
             }
         }
