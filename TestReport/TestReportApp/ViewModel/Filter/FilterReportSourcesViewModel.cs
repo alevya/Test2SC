@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using TestReportApp.DbProvider;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
@@ -87,7 +81,6 @@ namespace TestReportApp.ViewModel.Filter
                 {
                     SystemTableDetails.Add(new SystemTableViewModel(st.Name, st.InnerName));
                 }
-                //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
         }
 
@@ -101,7 +94,7 @@ namespace TestReportApp.ViewModel.Filter
             var dtTo = intervalViewModel.DateTo;
             
             var dbNames = intervalViewModel.GetDatabaseNameFromInterval();
-            var selectedSysTables = SystemTableDetails.Where(s => s.IsSelected).ToList();
+            var selectedSysTables = SystemTableDetails.Cast<SystemTableViewModel>().Where(s => s.IsSelected).ToList();
 
             if (!selectedSysTables.Any()) return;
 
@@ -115,7 +108,7 @@ namespace TestReportApp.ViewModel.Filter
                         foreach (var table in selectedSysTables)
                         {
                             var sQuery =
-                                $"SELECT COUNT(*) FROM `db0_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'" +
+                                $"SELECT COUNT(*) FROM `{table.InnerName}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'" +
                                 " UNION " +
                                 $"SELECT COUNT(*) FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
                             var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();

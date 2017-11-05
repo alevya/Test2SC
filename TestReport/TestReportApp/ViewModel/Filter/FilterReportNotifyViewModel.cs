@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace TestReportApp.ViewModel.Filter
     internal class FilterReportNotifyViewModel : ViewModelBase, IReportFilter
     {
         private BaseSystemTableViewModel _currentSystemTableDetail;
+
         public FilterReportNotifyViewModel(ReportKind model, IReportFilter baseFilterReportViewModel)
         {
             Model = model;
@@ -65,16 +68,49 @@ namespace TestReportApp.ViewModel.Filter
                     SystemTableDetails.Add(new SystemNotifyGroupViewModel(st.Name, st.Switch));
                 }
             }
-            //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
         }
 
-        public void GetDataForReport()
+        public async void GetDataForReport()
         {
             Debug.WriteLine("Получение данных из базы для отчета по уведомлениям");
 
             var intervalViewModel = this.FilterIntervalViewModel as FilterReportIntervalViewModel;
-            var dtFrom = intervalViewModel?.DateFrom;
-            var dtTo = intervalViewModel?.DateTo;
+            if (intervalViewModel == null) return;
+            var dtFrom = intervalViewModel.DateFrom;
+            var dtTo = intervalViewModel.DateTo;
+
+            var dbNames = intervalViewModel.GetDatabaseNameFromInterval();
+            var selectedSysTables = SystemTableDetails.Cast<SystemNotifyGroupViewModel>().Where(s => s.IsSelected).ToList();
+
+            if (!selectedSysTables.Any()) return;
+
+            var dResult = new Dictionary<string, int>();
+            foreach (var dbName in dbNames)
+            {
+                try
+                {
+                    using (var context = new ReportContext(dbName))
+                    {
+                        foreach (var table in selectedSysTables)
+                        {
+                            var sQuery =
+                                $"SELECT COUNT(*) FROM `{table.Switch}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
+                            var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();
+
+                            if (!dResult.ContainsKey(table.Name))
+                                dResult.Add(table.Name, res.Sum());
+                            else
+                                dResult[dbName] += res.Sum();
+                        }
+
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Debug.WriteLine(exc.Message);
+                }
+            }
+
         }
 
         #endregion
