@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using TestReportApp.DbProvider;
+using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
@@ -81,9 +83,56 @@ namespace TestReportApp.ViewModel.Filter
             }
         }
 
-        public void GetDataForReport()
+        public async void GetDataForReport()
         {
             Debug.WriteLine("Получение данных из базы для отчета по IP-адресам");
+
+            var intervalViewModel = this.FilterIntervalViewModel as FilterReportIntervalViewModel;
+            if (intervalViewModel == null) return;
+            var dtFrom = intervalViewModel.DateFrom;
+            var dtTo = intervalViewModel.DateTo;
+
+            var dbNames = intervalViewModel.GetDatabaseNameFromInterval();
+            var selectedSysTables = SystemTableDetails.Cast<SystemTableViewModel>().Where(s => s.IsSelected).ToList();
+
+            if (!selectedSysTables.Any()) return;
+
+            var dResult = new Dictionary<string, int>();
+            foreach (var dbName in dbNames)
+            {
+                try
+                {
+                    using (var context = new ReportContext(dbName))
+                    {
+                        foreach (var table in selectedSysTables)
+                        {
+                            var sQuery =
+                                $"SELECT P_S_IPv4, Count(*) AS Amount FROM `{table.InnerName}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 " +
+                                " UNION " +
+                                $"SELECT P_S_IPv4, Count(*) AS Amount FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 ";
+
+                            var res = await context.Database.SqlQuery<IpInfo>(sQuery).ToListAsync();
+                            foreach (var item in res)
+                            {
+                                if (!dResult.ContainsKey(item.P_S_IPv4))
+                                    dResult.Add(item.P_S_IPv4, item.Amount);
+                                else
+                                    dResult[item.P_S_IPv4] += item.Amount;
+                            }
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Debug.WriteLine(exc.Message);
+                }
+            }
+        }
+
+        public class IpInfo
+        {
+            public string P_S_IPv4{ get; set; }
+            public int Amount { get; set; }
         }
 
         #endregion
