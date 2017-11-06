@@ -7,6 +7,8 @@
              xmlns:view="clr-namespace:TestReportApp.View"
              xmlns:cmd ="clr-namespace:TestReportApp.ViewModel.Helpers"
              xmlns:filter="clr-namespace:TestReportApp.ViewModel.Filter"
+             xmlns:lvc ="clr-namespace:LiveCharts;assembly=LiveCharts.Wpf"
+             xmlns:chart="clr-namespace:TestReportApp.View.Chart"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="850">
     <UserControl.Resources>
@@ -93,7 +95,7 @@
             <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
-                   
+                  <chart:BasicColumnChart  Width="500" Height="251" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" /> 
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>

@@ -102,6 +102,9 @@
     <Compile Include="ViewModel\ReportWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
+    <Compile Include="View\Chart\BasicColumnChart.xaml.cs">
+      <DependentUpon>BasicColumnChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FilterReportIntervalView.xaml.cs">
       <DependentUpon>FilterReportIntervalView.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CompactFormStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Chart\BasicColumnChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
