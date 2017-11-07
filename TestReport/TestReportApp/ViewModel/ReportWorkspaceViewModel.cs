@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Filter;
@@ -42,6 +43,7 @@ namespace TestReportApp.ViewModel
         };
 
         private IReportFilter _currentReportKind;
+        private UserControl _chartView;
 
         #region Init
 
@@ -52,7 +54,7 @@ namespace TestReportApp.ViewModel
             CurrentReportKind = ReportKinds.FirstOrDefault();
             
             //Команда для формирования отчета
-            CreateReportCommand = new DelegateCommand(o => CurrentReportKind.GetDataForReport(), o => CurrentReportKind != null);
+            CreateReportCommand = new DelegateCommand(o => CurrentReportKind.GetDataForReport(this), o => CurrentReportKind != null);
 
             LoadContent = new DelegateCommand(
                 o =>
@@ -98,6 +100,16 @@ namespace TestReportApp.ViewModel
             set
             {
                 _currentReportKind = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserControl ChartView
+        {
+            get => _chartView;
+            set
+            {
+                _chartView = value;
                 OnPropertyChanged();
             }
         }

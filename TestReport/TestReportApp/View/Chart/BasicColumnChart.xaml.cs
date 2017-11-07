@@ -22,12 +22,25 @@ namespace TestReportApp.View.Chart
     /// </summary>
     public partial class BasicColumnChart : UserControl
     {
-        //public SeriesCollection SeriesCollection { get; set; }
-        //public string[] Labels { get; set; }
-        //public Func<double, string> Formatter { get; set; }
-        public BasicColumnChart()
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+        public BasicColumnChart(Dictionary<string, int> dResult)
         {
             InitializeComponent();
+
+            if(dResult == null) return;
+
+            SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "",
+                    Values = new ChartValues<int>(dResult.Values),
+                }
+            };
+            Labels = dResult.Keys.ToArray();
+
             //SeriesCollection = new SeriesCollection
             //                   {
             //                       new ColumnSeries
@@ -50,8 +63,7 @@ namespace TestReportApp.View.Chart
             //Labels = new[] { "Maria", "Susan", "Charles", "Frida" };
             //Formatter = value => value.ToString("N");
 
-            //DataContext = this;
-
+            DataContext = this;
         }
     }
 }

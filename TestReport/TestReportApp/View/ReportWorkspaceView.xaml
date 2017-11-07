@@ -95,7 +95,10 @@
             <HeaderedContentControl.Header>Отчет</HeaderedContentControl.Header>
             <ScrollViewer>
                 <StackPanel>
-                  <chart:BasicColumnChart  Width="500" Height="251" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" /> 
+                    <ContentControl Content="{Binding Path=ChartView}" DataContext="{StaticResource vm}" 
+                                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                    Width="Auto" Height="600">
+                    </ContentControl>
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>

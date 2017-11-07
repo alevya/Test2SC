@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using TestReportApp.ViewModel.Filter;
 
 namespace TestReportApp.ViewModel
@@ -10,6 +11,6 @@ namespace TestReportApp.ViewModel
         ShapeReportViewModel CurrentShape { get; set; }
 
         void GetContent();
-        void GetDataForReport();
+        void GetDataForReport(ReportWorkspaceViewModel reportWorkspaceViewModel = null);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Windows.Controls;
 using TestReportApp.ViewModel.Helpers;
 
 namespace TestReportApp.ViewModel.Filter
@@ -77,7 +78,7 @@ namespace TestReportApp.ViewModel.Filter
         public void GetContent()
         {   }
 
-        public void GetDataForReport()
+        public void GetDataForReport(ReportWorkspaceViewModel reportWorkspaceViewModel = null)
         {
             Debug.WriteLine("Получение данных из базы для отчета ТОЛЬКО по интервалу");
         }

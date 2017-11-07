@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Controls;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
@@ -83,7 +84,7 @@ namespace TestReportApp.ViewModel.Filter
             }
         }
 
-        public async void GetDataForReport()
+        public async void GetDataForReport(ReportWorkspaceViewModel reportWorkspaceViewModel = null)
         {
             Debug.WriteLine("Получение данных из базы для отчета по IP-адресам");
 
