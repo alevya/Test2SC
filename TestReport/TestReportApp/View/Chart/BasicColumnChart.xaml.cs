@@ -1,17 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 
@@ -25,21 +16,25 @@ namespace TestReportApp.View.Chart
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
-        public BasicColumnChart(Dictionary<string, int> dResult)
+        public BasicColumnChart(IEnumerable dResult)
         {
             InitializeComponent();
 
             if(dResult == null) return;
 
-            SeriesCollection = new SeriesCollection
+            var enumerable = dResult as Dictionary<string, int>;
+            if (enumerable != null)
             {
-                new ColumnSeries
+                SeriesCollection = new SeriesCollection
                 {
-                    Title = "",
-                    Values = new ChartValues<int>(dResult.Values),
-                }
-            };
-            Labels = dResult.Keys.ToArray();
+                    new ColumnSeries
+                    {
+                        Title = "",
+                        Values = new ChartValues<int>(enumerable.Values),
+                    }
+                };
+                Labels = enumerable.Keys.ToArray();
+            }
 
             //SeriesCollection = new SeriesCollection
             //                   {

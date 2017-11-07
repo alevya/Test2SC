@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Filter;
 using TestReportApp.ViewModel.Helpers;
 
@@ -34,12 +32,6 @@ namespace TestReportApp.ViewModel
                 TypeCode = TypeCodeReport.ReportOnIp,
                 Description = "Отчет по общему количеству событий от каждого IP-адреса",
             },
-            //new ReportKind
-            //{
-            //    Name = "Графики <X,Y> событий",
-            //    TypeCode = TypeCodeReport.ОтчетГрафик,
-            //    Description = @"Графики вида ""Время(Ось X)-Количество событий(Ось Y)""",
-            //},
         };
 
         private IReportFilter _currentReportKind;
@@ -54,7 +46,12 @@ namespace TestReportApp.ViewModel
             CurrentReportKind = ReportKinds.FirstOrDefault();
             
             //Команда для формирования отчета
-            CreateReportCommand = new DelegateCommand(o => CurrentReportKind.GetDataForReport(this), o => CurrentReportKind != null);
+            CreateReportCommand = new DelegateCommand(o =>
+                {
+                    ChartView = null;
+                    CurrentReportKind.GetDataForReport(this);
+                }, 
+            o => CurrentReportKind != null);
 
             LoadContent = new DelegateCommand(
                 o =>

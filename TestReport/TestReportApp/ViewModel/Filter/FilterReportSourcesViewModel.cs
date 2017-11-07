@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -7,12 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LiveCharts;
-using LiveCharts.Helpers;
-using LiveCharts.Wpf;
 using TestReportApp.DbProvider;
-using TestReportApp.View.Chart;
 using TestReportApp.ViewModel.Helpers;
+
 
 namespace TestReportApp.ViewModel.Filter
 {
@@ -133,28 +129,7 @@ namespace TestReportApp.ViewModel.Filter
                 }
             }
 
-            UserControl currentViewShape = null;
-            switch (CurrentShape.ShapeReport)
-            {
-                case ShapeCodeReport.LineChart:
-                    var columnChart = new BasicColumnChart(dResult);
-                    //columnChart.DataContext = columnChart;
-                    //columnChart.Labels = dResult.Keys.ToArray();
-                    //var column = new ColumnSeries
-                    //{
-                    //    Values = new ChartValues<int>(dResult.Values)
-                    //};
-                   
-                    //columnChart.SeriesCollection = new SeriesCollection(column);
-                    //columnChart.Formatter = values => values.ToString("N");
-                    //columnChart.InitializeComponent();
-                    
-                    currentViewShape = columnChart;
-                    break;
-                case ShapeCodeReport.TableChart:
-                    break;
-            }
-
+            var currentViewShape = this.GetChartView(CurrentShape.ShapeReport, dResult);
             if (reportWorkspaceViewModel != null)
                 reportWorkspaceViewModel.ChartView = currentViewShape;
         }
