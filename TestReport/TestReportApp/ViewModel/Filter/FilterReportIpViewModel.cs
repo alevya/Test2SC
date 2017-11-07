@@ -128,6 +128,10 @@ namespace TestReportApp.ViewModel.Filter
                     Debug.WriteLine(exc.Message);
                 }
             }
+
+            var currentViewShape = this.GetChartView(CurrentShape.ShapeReport, dResult);
+            if (reportWorkspaceViewModel != null)
+                reportWorkspaceViewModel.ChartView = currentViewShape;
         }
 
         public class IpInfo

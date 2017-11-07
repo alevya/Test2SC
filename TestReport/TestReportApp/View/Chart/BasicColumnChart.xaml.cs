@@ -17,13 +17,13 @@ namespace TestReportApp.View.Chart
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
-        public BasicColumnChart(IEnumerable dResult)
+        public BasicColumnChart(IEnumerable source)
         {
             InitializeComponent();
 
-            if(dResult == null) return;
+            if(source == null) return;
 
-            var enumerable = dResult as Dictionary<string, int>;
+            var enumerable = source as Dictionary<string, int>;
             if (enumerable != null)
             {
                 //SeriesCollection = new SeriesCollection

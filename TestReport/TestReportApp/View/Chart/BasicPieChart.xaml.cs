@@ -17,13 +17,13 @@ namespace TestReportApp.View.Chart
         public SeriesCollection SeriesCollection { get; set; }
         public Func<ChartPoint, string> PointLabel { get; set; }
 
-        public BasicPieChart(IEnumerable dResult)
+        public BasicPieChart(IEnumerable source)
         {
             InitializeComponent();
 
-            if (dResult == null) return;
+            if (source == null) return;
 
-            var enumerable = dResult as Dictionary<string, int>;
+            var enumerable = source as Dictionary<string, int>;
             if (enumerable != null)
             {
                 SeriesCollection = new SeriesCollection();

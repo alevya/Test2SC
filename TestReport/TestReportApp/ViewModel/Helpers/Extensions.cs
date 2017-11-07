@@ -18,6 +18,7 @@ namespace TestReportApp.ViewModel.Helpers
                 case ShapeCodeReport.PieChart:
                     return new BasicPieChart(source);
                 case ShapeCodeReport.TableChart:
+                    return new BasicTableChart(source);
                 case ShapeCodeReport.LineChart:
                 default:
                     return null;
