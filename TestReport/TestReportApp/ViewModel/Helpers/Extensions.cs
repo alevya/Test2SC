@@ -10,11 +10,12 @@ namespace TestReportApp.ViewModel.Helpers
         {
             switch (shapeCode)
             {
-                case ShapeCodeReport.LineChart:
-                    var columnChart = new BasicColumnChart(source);
-                    return columnChart;
+                case ShapeCodeReport.ColumnChart:
+                    return new BasicColumnChart(source);
+                case ShapeCodeReport.PieChart:
+                    return new BasicPieChart();
                 case ShapeCodeReport.TableChart:
-                    return null;
+                case ShapeCodeReport.LineChart:
                 default:
                     return null;
             }

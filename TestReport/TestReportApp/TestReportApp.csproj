@@ -106,6 +106,9 @@
     <Compile Include="View\Chart\BasicColumnChart.xaml.cs">
       <DependentUpon>BasicColumnChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Chart\BasicPieChart.xaml.cs">
+      <DependentUpon>BasicPieChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FilterReportIntervalView.xaml.cs">
       <DependentUpon>FilterReportIntervalView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Chart\BasicColumnChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Chart\BasicPieChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
