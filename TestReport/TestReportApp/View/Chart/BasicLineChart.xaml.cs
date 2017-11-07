@@ -30,42 +30,34 @@ namespace TestReportApp.View.Chart
         {
             InitializeComponent();
 
+
+            if (dtFrom == null || dtTo == null || dtFrom >= dtTo) return;
+            if (source == null) return;
+
             var gradientBrush = new LinearGradientBrush
                                 {
                                     StartPoint = new Point(0, 0),
                                     EndPoint = new Point(0, 1)
                                 };
-            gradientBrush.GradientStops.Add(new GradientStop(Color.FromRgb(33, 148, 241), 0));
+            //gradientBrush.GradientStops.Add(new GradientStop(Color.FromRgb(33, 148, 241), 0));
             gradientBrush.GradientStops.Add(new GradientStop(Colors.Transparent, 1));
-
-            if (dtFrom == null || dtTo == null || dtFrom >= dtTo) return;
-            if (source == null) return;
 
             var enumerable = source as Dictionary<string, int>;
             if (enumerable != null)
             {
-                SeriesCollection = new SeriesCollection
-                                   {
-                                       new LineSeries
-                                       {
-                                           Values = GetData(),
-                                           Fill = gradientBrush,
-                                           StrokeThickness = 1,
-                                           PointGeometrySize = 0
-                                       }
-                                   };
+                SeriesCollection = new SeriesCollection();
 
-                //foreach (var item in enumerable)
-                //{
-                //    var ser = new LineSeries
-                //    {
-                //        Title = item.Key,
-                //        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Value) },
-                //        StrokeThickness = 1,
-                //        DataLabels = true,
-                //    };
-                //    SeriesCollection.Add(ser);
-                //}  
+                foreach (var item in enumerable)
+                {
+                    var ser = new LineSeries
+                    {
+                        Title = item.Key,
+                        Values = GetData(dtFrom.Value, dtTo.Value, new[] { item.Value }),
+                        StrokeThickness = 1,
+                        Fill = gradientBrush,
+                    };
+                    SeriesCollection.Add(ser);
+                }
             }
 
             ZoomingMode = ZoomingOptions.X;
@@ -105,38 +97,29 @@ namespace TestReportApp.View.Chart
             }
         }
 
-        private ChartValues<DateTimePoint> GetData()
+        private ChartValues<DateTimePoint> GetData(DateTime dtFrom, DateTime dtTo, int[] source)
         {
-            var r = new Random();
-            var trend = 100;
             var values = new ChartValues<DateTimePoint>();
+            var tSpan = dtTo - dtFrom;
+            int qDays = tSpan.Days;
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < qDays; i++)
             {
-                var seed = r.NextDouble();
-                if (seed > .8) trend += seed > .9 ? 50 : -50;
-                values.Add(new DateTimePoint(DateTime.Now.AddDays(i), trend + r.Next(0, 10)));
+                values.Add(new DateTimePoint(dtFrom.AddDays(i), source[0]));
             }
-
+            
             return values;
         }
 
         private void ResetZoomOnClick(object sender, RoutedEventArgs e)
         {
-            //Use the axis MinValue/MaxValue properties to specify the values to display.
-            //use double.Nan to clear it.
 
             X.MinValue = double.NaN;
             X.MaxValue = double.NaN;
             Y.MinValue = double.NaN;
             Y.MaxValue = double.NaN;
         }
-        private IEnumerable<string> _getIntervalDateTime(DateTime dtFrom, DateTime dtTo)
-        {
-            var result = new List<string>();
-            return result;
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -154,7 +137,7 @@ namespace TestReportApp.View.Chart
             switch ((ZoomingOptions) value)
             {
                 case ZoomingOptions.None:
-                    return "None";
+                    return "Отсутствует";
                 case ZoomingOptions.X:
                     return "X";
                 case ZoomingOptions.Y:
@@ -163,14 +146,12 @@ namespace TestReportApp.View.Chart
                     return "XY";
                 default:
                     return null;
-                //throw new ArgumentOutOfRangeException();
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
-            //throw new NotImplementedException();
         }
     }
 }

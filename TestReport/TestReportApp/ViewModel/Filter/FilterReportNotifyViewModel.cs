@@ -113,7 +113,7 @@ namespace TestReportApp.ViewModel.Filter
                 }
             }
 
-            var currentViewShape = this.GetChartView(CurrentShape.ShapeReport, dResult);
+            var currentViewShape = this.GetChartView(CurrentShape.ShapeReport, dResult, dtFrom, dtTo);
             if (reportWorkspaceViewModel != null)
                 reportWorkspaceViewModel.ChartView = currentViewShape;
 

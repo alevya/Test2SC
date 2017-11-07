@@ -19,7 +19,7 @@ namespace TestReportApp.ViewModel.Helpers
                 case ShapeCodeReport.TableChart:
                     return new BasicTableChart(source);
                 case ShapeCodeReport.LineChart:
-                    return new BasicLineChart(source, dtFrom, dtFrom);
+                    return new BasicLineChart(source, dtFrom, dtTo);
                 default:
                     return null;
             }

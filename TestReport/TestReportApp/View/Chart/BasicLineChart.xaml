@@ -18,11 +18,11 @@
 
         <StackPanel Grid.Row="0">
             <Button Click="ToogleZoomingMode">
-                <TextBlock>Toggle zoming mode, current is: 
+                <TextBlock>Переключатель режима увеличения, текущий: 
                     <TextBlock Text="{Binding ZoomingMode, Converter={StaticResource ZoomingModeCoverter}}"/>
                 </TextBlock>
             </Button>
-            <Button Click="ResetZoomOnClick">Reset Zoom</Button>
+            <Button Click="ResetZoomOnClick">Сброс увеличения</Button>
         </StackPanel>
 
         <lvc:CartesianChart Grid.Row="1" Series="{Binding SeriesCollection}" Zoom="{Binding ZoomingMode}"
