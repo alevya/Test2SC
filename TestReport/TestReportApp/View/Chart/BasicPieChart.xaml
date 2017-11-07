@@ -10,7 +10,9 @@
     <Grid>
         <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" 
                       InnerRadius="0" DataTooltip="{x:Null}"
-                      Series="{Binding SeriesCollection}">
+                      Series="{Binding SeriesCollection}"
+                      DisableAnimations="True"
+                      Hoverable="False">
         </lvc:PieChart>
     </Grid>
 </UserControl>
