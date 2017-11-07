@@ -27,6 +27,7 @@ namespace TestReportApp.ViewModel.Filter
                                {
                                    new ShapeReportViewModel(ShapeCodeReport.ColumnChart),
                                    new ShapeReportViewModel(ShapeCodeReport.PieChart),
+                                   new ShapeReportViewModel(ShapeCodeReport.LineChart),
                                };
             CurrentShape = ShapesCodeReport.FirstOrDefault();
         }
