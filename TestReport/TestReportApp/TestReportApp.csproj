@@ -85,6 +85,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModel\Filter\BaseSystemTableViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportIntervalViewModel.cs" />
     <Compile Include="ViewModel\Filter\FilterReportIpViewModel.cs" />
@@ -105,6 +106,9 @@
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
     <Compile Include="View\Chart\BasicColumnChart.xaml.cs">
       <DependentUpon>BasicColumnChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chart\BasicLineChart.xaml.cs">
+      <DependentUpon>BasicLineChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Chart\BasicPieChart.xaml.cs">
       <DependentUpon>BasicPieChart.xaml</DependentUpon>
@@ -164,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Chart\BasicColumnChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Chart\BasicLineChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

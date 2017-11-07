@@ -26,15 +26,6 @@ namespace TestReportApp.View.Chart
             var enumerable = source as Dictionary<string, int>;
             if (enumerable != null)
             {
-                //SeriesCollection = new SeriesCollection
-                //{
-                //    new ColumnSeries
-                //    {
-                //        Title = "",
-                //        Values = new ChartValues<int>(enumerable.Values),
-                //    }
-                //};
-
                 SeriesCollection = new SeriesCollection();
                 foreach (var item in enumerable)
                 {
