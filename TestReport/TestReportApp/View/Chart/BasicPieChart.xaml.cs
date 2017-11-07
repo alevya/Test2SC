@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 namespace TestReportApp.View.Chart
@@ -10,14 +14,34 @@ namespace TestReportApp.View.Chart
     /// </summary>
     public partial class BasicPieChart : UserControl
     {
+        public SeriesCollection SeriesCollection { get; set; }
         public Func<ChartPoint, string> PointLabel { get; set; }
 
-        public BasicPieChart()
+        public BasicPieChart(IEnumerable dResult)
         {
             InitializeComponent();
 
+            if (dResult == null) return;
+
+            var enumerable = dResult as Dictionary<string, int>;
+            if (enumerable != null)
+            {
+                SeriesCollection = new SeriesCollection();
+                foreach (var item in enumerable)
+                {
+                    var ser = new PieSeries
+                    {
+                        Title = item.Key,
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Value) },
+                        DataLabels = true,
+                    };
+                    SeriesCollection.Add(ser);
+                }
+            }
+
             PointLabel = chartPoint =>
                 $"{chartPoint.Y} ({chartPoint.Participation:P})";
+
 
             DataContext = this;
         }
@@ -34,7 +58,7 @@ namespace TestReportApp.View.Chart
             }
 
             var selectedSeries = (PieSeries)chartpoint.SeriesView;
-            selectedSeries.PushOut = 8;
+            selectedSeries.PushOut = 15;
         }
     }
 }

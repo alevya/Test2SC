@@ -29,10 +29,6 @@ namespace TestReportApp.ViewModel.Filter
                                    new ShapeReportViewModel(ShapeCodeReport.PieChart),
                                };
             CurrentShape = ShapesCodeReport.FirstOrDefault();
-            //SelectSystemTableDetail = new DelegateCommand(
-            //     o=> CurrentSystemTableDetail.IsSelected = !CurrentSystemTableDetail.IsSelected,
-            //     o=> CurrentSystemTableDetail != null
-            //     );
         }
 
         #region Properties

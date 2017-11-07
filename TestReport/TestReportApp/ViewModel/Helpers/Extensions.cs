@@ -13,7 +13,7 @@ namespace TestReportApp.ViewModel.Helpers
                 case ShapeCodeReport.ColumnChart:
                     return new BasicColumnChart(source);
                 case ShapeCodeReport.PieChart:
-                    return new BasicPieChart();
+                    return new BasicPieChart(source);
                 case ShapeCodeReport.TableChart:
                 case ShapeCodeReport.LineChart:
                 default:
