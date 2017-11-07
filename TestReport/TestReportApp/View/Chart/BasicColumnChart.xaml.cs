@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 namespace TestReportApp.View.Chart
@@ -25,14 +26,27 @@ namespace TestReportApp.View.Chart
             var enumerable = dResult as Dictionary<string, int>;
             if (enumerable != null)
             {
-                SeriesCollection = new SeriesCollection
+                //SeriesCollection = new SeriesCollection
+                //{
+                //    new ColumnSeries
+                //    {
+                //        Title = "",
+                //        Values = new ChartValues<int>(enumerable.Values),
+                //    }
+                //};
+
+                SeriesCollection = new SeriesCollection();
+                foreach (var item in enumerable)
                 {
-                    new ColumnSeries
+                    var ser = new ColumnSeries
                     {
-                        Title = "",
-                        Values = new ChartValues<int>(enumerable.Values),
-                    }
-                };
+                        Title = item.Key,
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Value) },
+                        DataLabels = true,
+                    };
+                    SeriesCollection.Add(ser);
+                }
+
                 Labels = enumerable.Keys.ToArray();
             }
             //Formatter = value => value.ToString("N");
@@ -40,4 +54,6 @@ namespace TestReportApp.View.Chart
             DataContext = this;
         }
     }
+
+
 }

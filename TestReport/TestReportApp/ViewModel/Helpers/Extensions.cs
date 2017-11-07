@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Windows.Controls;
+using LiveCharts.Definitions.Charts;
+using LiveCharts.Wpf.Charts.Base;
 using TestReportApp.View.Chart;
 
 namespace TestReportApp.ViewModel.Helpers
@@ -12,6 +14,7 @@ namespace TestReportApp.ViewModel.Helpers
             {
                 case ShapeCodeReport.ColumnChart:
                     return new BasicColumnChart(source);
+                   
                 case ShapeCodeReport.PieChart:
                     return new BasicPieChart(source);
                 case ShapeCodeReport.TableChart:
