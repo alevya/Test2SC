@@ -34,14 +34,6 @@ namespace TestReportApp.View.Chart
             if (dtFrom == null || dtTo == null || dtFrom >= dtTo) return;
             if (source == null) return;
 
-            var gradientBrush = new LinearGradientBrush
-                                {
-                                    StartPoint = new Point(0, 0),
-                                    EndPoint = new Point(0, 1)
-                                };
-            //gradientBrush.GradientStops.Add(new GradientStop(Color.FromRgb(33, 148, 241), 0));
-            gradientBrush.GradientStops.Add(new GradientStop(Colors.Transparent, 1));
-
             var enumerable = source as Dictionary<string, int>;
             if (enumerable != null)
             {
@@ -54,7 +46,7 @@ namespace TestReportApp.View.Chart
                         Title = item.Key,
                         Values = GetData(dtFrom.Value, dtTo.Value, new[] { item.Value }),
                         StrokeThickness = 1,
-                        Fill = gradientBrush,
+                        Fill = Brushes.Transparent,
                     };
                     SeriesCollection.Add(ser);
                 }
