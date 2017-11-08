@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,7 @@ namespace TestReportApp.View.Chart
             if (dtFrom == null || dtTo == null || dtFrom >= dtTo) return;
             if (source == null) return;
 
-            var enumerable = source as Dictionary<string, int>;
+            var enumerable = source as Dictionary<string, List<DateTime>>;
             if (enumerable != null)
             {
                 SeriesCollection = new SeriesCollection();
@@ -45,7 +46,7 @@ namespace TestReportApp.View.Chart
                     var ser = new LineSeries
                     {
                         Title = item.Key,
-                        Values = GetData(dtFrom.Value, dtTo.Value, new[] { item.Value }),
+                        Values = GetData(dtFrom.Value, dtTo.Value,  item.Value),
                         StrokeThickness = 1,
                         Fill = Brushes.Transparent,
                     };
@@ -90,7 +91,7 @@ namespace TestReportApp.View.Chart
             }
         }
 
-        private ChartValues<DateTimePoint> GetData(DateTime dtFrom, DateTime dtTo, int[] source)
+        private ChartValues<DateTimePoint> GetData(DateTime dtFrom, DateTime dtTo, IEnumerable<DateTime> source)
         {
             var values = new ChartValues<DateTimePoint>();
             var tSpan = dtTo - dtFrom;
@@ -98,7 +99,9 @@ namespace TestReportApp.View.Chart
 
             for (var i = 0; i < qDays; i++)
             {
-                values.Add(new DateTimePoint(dtFrom.AddDays(i), source[0]));
+                var dtCurrent = dtFrom.AddDays(i);
+                var value = source.Count(s => s.Date.Equals(dtCurrent.Date));
+                values.Add(new DateTimePoint(dtFrom.AddDays(i), value));
             }
             
             return values;
