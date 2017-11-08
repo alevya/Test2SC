@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Controls;
 using TestReportApp.DbProvider;
 using TestReportApp.DbProvider.Models;
 using TestReportApp.ViewModel.Helpers;
@@ -80,7 +79,6 @@ namespace TestReportApp.ViewModel.Filter
                 {
                     SystemTableDetails.Add(new SystemTableViewModel(st.Name, st.InnerName));
                 }
-                //CurrentSystemTableDetail = SystemTableDetails.FirstOrDefault();
             }
         }
 
