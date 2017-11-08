@@ -30,7 +30,11 @@
                             DisableAnimations="True"
                             Hoverable="False">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Name ="X" Title="Дата/Время" LabelFormatter="{Binding XFormatter}" Separator="{x:Static lvc:DefaultAxes.CleanSeparator}"></lvc:Axis>
+                <lvc:Axis Name ="X" Title="Дата/Время" LabelFormatter="{Binding XFormatter}" Separator="{x:Static lvc:DefaultAxes.CleanSeparator}"
+                          RangeChanged="X_OnRangeChanged"
+                          >
+                    
+                </lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Name="Y" Title ="Количество событий" LabelFormatter="{Binding YFormatter}" ></lvc:Axis>

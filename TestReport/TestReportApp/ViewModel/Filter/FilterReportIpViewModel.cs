@@ -98,7 +98,7 @@ namespace TestReportApp.ViewModel.Filter
 
             if (!selectedSysTables.Any()) return;
 
-            var dResult = new Dictionary<string, int>();
+            var dResult = new Dictionary<string, IpInfo>();
             foreach (var dbName in dbNames)
             {
                 try
@@ -108,17 +108,20 @@ namespace TestReportApp.ViewModel.Filter
                         foreach (var table in selectedSysTables)
                         {
                             var sQuery =
-                                $"SELECT P_S_IPv4, Count(*) AS Amount FROM `{table.InnerName}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 " +
+                                $"SELECT P_S_IPv4, P_S_DNS, Count(*) AS Amount FROM `{table.InnerName}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 " +
                                 " UNION " +
-                                $"SELECT P_S_IPv4, Count(*) AS Amount FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 ";
+                                $"SELECT P_S_IPv4, P_S_DNS, Count(*) AS Amount FROM `normalized_{table.Name}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}' GROUP BY P_S_IPv4 ";
 
                             var res = await context.Database.SqlQuery<IpInfo>(sQuery).ToListAsync();
+                            
                             foreach (var item in res)
                             {
                                 if (!dResult.ContainsKey(item.P_S_IPv4))
-                                    dResult.Add(item.P_S_IPv4, item.Amount);
+                                    dResult.Add(item.P_S_IPv4, item);
                                 else
-                                    dResult[item.P_S_IPv4] += item.Amount;
+                                {
+                                    dResult[item.P_S_IPv4].Amount += item.Amount;
+                                }
                             }
                         }
                     }
@@ -132,12 +135,6 @@ namespace TestReportApp.ViewModel.Filter
             var currentViewShape = this.GetChartView(CurrentShape.ShapeReport, dResult);
             if (reportWorkspaceViewModel != null)
                 reportWorkspaceViewModel.ChartView = currentViewShape;
-        }
-
-        public class IpInfo
-        {
-            public string P_S_IPv4{ get; set; }
-            public int Amount { get; set; }
         }
 
         #endregion

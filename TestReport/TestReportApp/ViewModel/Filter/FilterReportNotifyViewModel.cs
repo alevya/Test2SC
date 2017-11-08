@@ -86,7 +86,7 @@ namespace TestReportApp.ViewModel.Filter
 
             if (!selectedSysTables.Any()) return;
 
-            var dResult = new Dictionary<string, int>();
+            var dResult = new Dictionary<string, List<DateTime>>();
             foreach (var dbName in dbNames)
             {
                 try
@@ -96,13 +96,13 @@ namespace TestReportApp.ViewModel.Filter
                         foreach (var table in selectedSysTables)
                         {
                             var sQuery =
-                                $"SELECT COUNT(*) FROM `{table.Switch}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
-                            var res = await context.Database.SqlQuery<int>(sQuery).ToListAsync();
+                                $"SELECT P_S_DateTime FROM `{table.Switch}` WHERE P_S_DateTime >= '{dtFrom}' AND P_S_DateTime <= '{dtTo}'";
+                            var res = await context.Database.SqlQuery<DateTime>(sQuery).ToListAsync();
 
                             if (!dResult.ContainsKey(table.Name))
-                                dResult.Add(table.Name, res.Sum());
-                            else
-                                dResult[dbName] += res.Sum();
+                                dResult.Add(table.Name, res);
+                            //else
+                            //    dResult[dbName] += res.Sum();
                         }
 
                     }

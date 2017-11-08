@@ -13,8 +13,9 @@
                            HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray"
                           GridLinesVisibility="All" VerticalGridLinesBrush="Black">
                     <DataGrid.Columns>
-                       <DataGridTextColumn Header="IP-адреса" Binding="{Binding Path=Name}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Количество" Binding="{Binding Path=Value}" ></DataGridTextColumn>
+                       <DataGridTextColumn Header="IP-адрес" Binding="{Binding Path=P_S_IPv4}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="DNS" Binding="{Binding Path=P_S_DNS}" ></DataGridTextColumn>
+                       <DataGridTextColumn Header="Количество" Binding="{Binding Path=Amount}" ></DataGridTextColumn>
                     </DataGrid.Columns>   
                      
                  </DataGrid>

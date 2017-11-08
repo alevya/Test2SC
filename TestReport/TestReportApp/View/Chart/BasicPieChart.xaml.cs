@@ -23,7 +23,7 @@ namespace TestReportApp.View.Chart
 
             if (source == null) return;
 
-            var enumerable = source as Dictionary<string, int>;
+            var enumerable = source as Dictionary<string, List<DateTime>>;
             if (enumerable != null)
             {
                 SeriesCollection = new SeriesCollection();
@@ -32,7 +32,7 @@ namespace TestReportApp.View.Chart
                     var ser = new PieSeries
                     {
                         Title = item.Key,
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Value) },
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(item.Value.Count) },
                         DataLabels = true,
                     };
                     SeriesCollection.Add(ser);
